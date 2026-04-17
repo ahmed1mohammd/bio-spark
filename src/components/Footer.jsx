@@ -7,10 +7,10 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer-top">
         <div className="footer-grid">
-          
+
           {/* Column 1: Brand */}
           <div className="footer-col brand-col">
-            <Link to="/" className="footer-logo" onClick={() => window.scrollTo(0,0)}>
+            <Link to="/" className="footer-logo" onClick={() => window.scrollTo(0, 0)}>
               <span>Bio</span>Spark
             </Link>
             <p className="footer-desc">
@@ -27,10 +27,10 @@ export default function Footer() {
           <div className="footer-col">
             <h4 className="col-title">Explore</h4>
             <ul className="footer-links">
-              <li><Link to="/products" onClick={() => window.scrollTo(0,0)}>Our Packages</Link></li>
-              <li><Link to="/experiments" onClick={() => window.scrollTo(0,0)}>Individual Experiments</Link></li>
-              <li><Link to="/events" onClick={() => window.scrollTo(0,0)}>Events & Shows</Link></li>
-              <li><Link to="/articles" onClick={() => window.scrollTo(0,0)}>Articles & News</Link></li>
+              <li><Link to="/products" onClick={() => window.scrollTo(0, 0)}>Our Packages</Link></li>
+              <li><Link to="/experiments" onClick={() => window.scrollTo(0, 0)}>Individual Experiments</Link></li>
+              <li><Link to="/events" onClick={() => window.scrollTo(0, 0)}>Events & Shows</Link></li>
+              <li><Link to="/articles" onClick={() => window.scrollTo(0, 0)}>Articles & News</Link></li>
             </ul>
           </div>
 
@@ -41,7 +41,7 @@ export default function Footer() {
               <li><a href="/#about">About Us</a></li>
               <li><a href="/#mission-vision">Mission & Vision</a></li>
               <li><a href="/#board">Our Team</a></li>
-              <li><a href="#">Careers</a></li>
+
             </ul>
           </div>
 
@@ -49,7 +49,7 @@ export default function Footer() {
           <div className="footer-col">
             <h4 className="col-title">Contact Us</h4>
             <ul className="contact-info">
-              <li><FaMapMarkerAlt className="icon" /> Assiut, Egypt</li>
+              <li><FaMapMarkerAlt className="icon" /> القاهرة</li>
               <li><FaPhoneAlt className="icon" /> +20 11 40866774</li>
               <li><FaEnvelope className="icon" /> biospark225@gmail.com</li>
             </ul>
