@@ -49,7 +49,7 @@ export default function Footer() {
           <div className="footer-col">
             <h4 className="col-title">Contact Us</h4>
             <ul className="contact-info">
-              <li><FaMapMarkerAlt className="icon" /> القاهرة</li>
+              <li><FaMapMarkerAlt className="icon" /> Cairo, Egypt</li>
               <li><FaPhoneAlt className="icon" /> +20 11 40866774</li>
               <li><FaEnvelope className="icon" /> biospark225@gmail.com</li>
             </ul>
