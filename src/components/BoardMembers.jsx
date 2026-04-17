@@ -1,0 +1,170 @@
+import React, { useState, useEffect } from 'react';
+import { FaLinkedin, FaFacebook, FaTiktok } from 'react-icons/fa';
+
+export default function BoardMembers() {
+  const [members, setMembers] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setMembers([
+        {
+          id: 1,
+          name: "Ziad Khalil",
+          role: "Founder & Lead Scientist",
+          description: "Driven by a passion to make science accessible, interactive, and beautifully engaging for all ages.",
+          image: "/main.png",
+          linkedin: "#", facebook: "#", tiktok: "#"
+        },
+        {
+          id: 2,
+          name: "Manar",
+          role: "Head of Operations",
+          description: "Bridging the gap between cutting-edge scientific research and community education with over a decade of operational excellence.",
+          image: "/main.png",
+          linkedin: "#", facebook: "#", tiktok: "#"
+        }
+      ]);
+      setLoading(false);
+    }, 600);
+  }, []);
+
+  return (
+    <div className="section" style={{ paddingTop: '8rem', paddingBottom: '8rem' }}>
+      <div className="container" style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1.5rem' }}>
+        <h2 style={{ textAlign: 'center', marginBottom: '6rem', fontSize: '2.5rem' }}>The Minds Behind Bio Spark</h2>
+        
+        {loading ? (
+          <div style={{ textAlign: 'center', padding: '2rem' }}>Loading team members...</div>
+        ) : (
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', 
+            gap: '3rem',
+            maxWidth: '1000px',
+            margin: '0 auto'
+          }}>
+            {members.map(member => (
+              <div key={member.id} className="team-card glass-panel interactive">
+                <div className="floating-avatar">
+                  <img 
+                    src={member.image} 
+                    alt={member.name} 
+                    className="avatar-img"
+                  />
+                </div>
+                <div className="team-content">
+                  <h3 className="team-name">{member.name}</h3>
+                  <p className="team-role">{member.role}</p>
+                  <p className="team-desc">{member.description}</p>
+                  
+                  <div className="social-links">
+                    <a href={member.linkedin} className="social-icon" aria-label="LinkedIn"><FaLinkedin /></a>
+                    <a href={member.facebook} className="social-icon" aria-label="Facebook"><FaFacebook /></a>
+                    <a href={member.tiktok} className="social-icon" aria-label="TikTok"><FaTiktok /></a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <style>{`
+        .team-card {
+          position: relative;
+          border-radius: 24px;
+          text-align: center;
+          padding: 6rem 2.5rem 2.5rem 2.5rem;
+          margin-top: 60px; /* Space for the floating avatar */
+          background: rgba(10, 25, 50, 0.7);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .floating-avatar {
+          position: absolute;
+          top: -75px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 150px;
+          height: 150px;
+          border-radius: 50%;
+          border: 4px solid var(--accent-cyan);
+          padding: 5px;
+          background: #001428; /* Matching the site dark bg to prevent transparency issues */
+          box-shadow: 0 15px 35px rgba(0, 139, 240, 0.35);
+          z-index: 10;
+        }
+
+        .avatar-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 50%;
+        }
+
+        .team-content {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          height: 100%;
+          width: 100%;
+        }
+
+        .team-name {
+          font-size: 1.6rem;
+          color: white;
+          margin-bottom: 0.4rem;
+        }
+
+        .team-role {
+          font-size: 1rem;
+          color: var(--accent-cyan);
+          font-weight: 600;
+          margin-bottom: 1.5rem;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+        }
+
+        .team-desc {
+          font-size: 1.05rem;
+          color: var(--text-secondary);
+          line-height: 1.6;
+          margin-bottom: 2.5rem;
+          flex: 1;
+        }
+
+        .social-links {
+          display: flex;
+          gap: 1.5rem;
+          justify-content: center;
+          margin-top: auto;
+        }
+
+        .social-icon {
+          color: var(--text-secondary);
+          font-size: 1.2rem;
+          transition: all 0.3s ease;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 45px;
+          height: 45px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.05);
+        }
+
+        .social-icon:hover {
+          color: white;
+          background: var(--accent-cyan);
+          transform: translateY(-4px);
+          box-shadow: 0 8px 20px rgba(0, 139, 240, 0.4);
+        }
+      `}</style>
+    </div>
+  );
+}

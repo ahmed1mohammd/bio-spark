@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --primary-blue: #0564c2;
+  --light-blue: #008bf0;
+  --accent-green: #65a92e;
+  --accent-cyan: #84c233;
+  --text-primary: #ffffff;
+  --text-secondary: #E2E8F0;
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
+  --glass-blur: blur(16px);
+  --card-radius: 20px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--text-primary);
+  /* Modern dynamic background base */
+  background: #012b7d;
+  background-attachment: fixed;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  text-align: center;
+  margin-bottom: 3rem;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+p {
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.section {
+  padding: 6rem 2rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+}
+
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 8rem;
+}
+
+/* Base Glassmorphism Panel */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--glass-shadow);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+}
+
+/* Hover effect for interactive panels */
+.glass-panel.interactive:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 139, 240, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Buttons */
+.btn-primary, .btn-secondary, .btn-accent {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 1.8rem;
+  background: var(--accent-green);
+  color: #000;
+  border: none;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  box-shadow: 0 4px 15px rgba(101, 169, 46, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary:hover, .btn-secondary:hover, .btn-accent:hover {
+  background: linear-gradient(90deg, #65a92e, #84c233);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(101, 169, 46, 0.7);
+  color: #000;
+}
+
+.btn-primary:active, .btn-secondary:active, .btn-accent:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 10px rgba(101, 169, 46, 0.4);
+}
+
+.grid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+/* Spark Character Filter Utility */
+.spark-glow {
+  filter: drop-shadow(0 0 15px rgba(0, 139, 240, 0.5));
+  transition: transform 0.5s ease;
+}
+
+.spark-glow:hover {
+  transform: scale(1.05) rotate(2deg);
+}
+
+#bg-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .section {
+    padding: 4rem 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .section {
+    padding: 3rem 1rem;
+  }
+
+  .grid-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .hero-section {
+    padding-top: 6rem;
+  }
+}
+
+/* --- Section Background Gradients --- */
+#home {
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(0, 139, 240, 0.4) 0%, transparent 60%),
+    linear-gradient(135deg, #012b7d 0%, #008bf0 100%);
+}
+
+#clients {
+  background: linear-gradient(135deg, #008bf0 0%, #004391 100%);
+}
+
+#about {
+  background: 
+    radial-gradient(circle at 80% 50%, rgba(5, 100, 194, 0.3) 0%, transparent 60%),
+    linear-gradient(180deg, #004391 0%, #0564c2 100%);
+}
+
+#mission-vision {
+  background: linear-gradient(180deg, #0564c2 0%, #0145a8 100%);
+}
+
+#why-choose-us {
+  /* Subtle green tone (#65a92e) very light blend */
+  background: 
+    radial-gradient(circle at 30% 80%, rgba(101, 169, 46, 0.15) 0%, transparent 70%),
+    linear-gradient(135deg, #0145a8 0%, #0564c2 100%);
+}
+
+#products {
+  /* Slightly brighter gradient with soft mix of #84c233 */
+  background: 
+    radial-gradient(circle at 90% 10%, rgba(132, 194, 51, 0.25) 0%, transparent 70%),
+    linear-gradient(135deg, #0564c2 0%, #008bf0 100%);
+}
+
+#board {
+  /* Darker blue gradient for contrast */
+  background: 
+    radial-gradient(circle at 50% 0%, rgba(0, 67, 145, 0.4) 0%, transparent 60%),
+    linear-gradient(135deg, #004391 0%, #002b77 100%);
+}
