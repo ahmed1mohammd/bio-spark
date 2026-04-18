@@ -21,9 +21,9 @@ export default function BoardMembers() {
         {
           id: 2,
           name: "Manar",
-          role: "Head of Operations",
-          description: "Bridging the gap between cutting-edge scientific research and community education with over a decade of operational excellence.",
-          image: "/main.png",
+          role: "Co-founder",
+          description: "I'm a science communicator who can turn biology into fun and interactive experiences, and also let you experiment and explore everything on your own.",
+          image: "https://i.ibb.co/tM3SJCFR/8e9c6115-2587-41b6-a9bf-36f459d64454.jpg",
           linkedin: "#", facebook: "#", tiktok: "#"
         }
       ]);
