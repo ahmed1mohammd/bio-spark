@@ -92,7 +92,7 @@ export default function Testimonials() {
           display: flex;
           width: max-content;
           gap: 2.5rem;
-          animation: scrollMarquee 25s linear infinite;
+          animation: scrollMarquee 100s linear infinite;
         }
 
         .marquee-track:hover {
