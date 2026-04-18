@@ -10,11 +10,13 @@ export default function BoardMembers() {
       setMembers([
         {
           id: 1,
-          name: "Ziad Khalil",
-          role: "Founder & Lead Scientist",
+          name: "Dr_Zeee",
+          role: "CEO & Founder | Science Communicator | Lab Specialist",
           description: "Driven by a passion to make science accessible, interactive, and beautifully engaging for all ages.",
-          image: "/main.png",
-          linkedin: "#", facebook: "#", tiktok: "#"
+          image: "https://i.ibb.co/Swf7dWKP/1253ad67-7fdc-438e-b138-3945c710d495.jpg",
+          linkedin: "https://www.linkedin.com/in/zyad-khalil-856071288?trk=contact-info",
+          facebook: "https://www.facebook.com/share/1WK8z3N1bD/?mibextid=wwXIfr",
+          tiktok: "https://www.tiktok.com/@zyadmarcello?is_from_webapp=1&sender_device=pc"
         },
         {
           id: 2,
