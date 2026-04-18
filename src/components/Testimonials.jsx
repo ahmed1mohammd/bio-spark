@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { FaStar } from 'react-icons/fa';
 
 export default function Testimonials() {
@@ -45,8 +45,64 @@ export default function Testimonials() {
     }
   ];
 
-  /* Duplicate items to create a seamless infinite scroll effect */
-  const testimonials = [...baseTestimonials, ...baseTestimonials, ...baseTestimonials, ...baseTestimonials];
+  /* Duplicate items exactly twice to create two identical halves for perfect math on scroll loop */
+  const testimonials = [...baseTestimonials, ...baseTestimonials, ...baseTestimonials, ...baseTestimonials, ...baseTestimonials, ...baseTestimonials, ...baseTestimonials, ...baseTestimonials];
+
+  const trackRef = useRef(null);
+  const [isDown, setIsDown] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    let animationId;
+    const speed = 0.3; // Very slow speed
+
+    const autoScroll = () => {
+      // Auto scroll only if not dragging and not hovered
+      if (!isDown && !isHovered) {
+        track.scrollLeft += speed;
+        // If we scrolled past exactly half the total width (the first copy), seamlessly jump back to 0
+        // We use scrollWidth / 2 assuming the track contains two perfectly identical halves (which it does via duplication)
+        if (track.scrollLeft >= track.scrollWidth / 2) {
+          track.scrollLeft = 0;
+        } else if (track.scrollLeft <= 0) {
+          // If dragged to the left edge, jump to middle
+          track.scrollLeft = track.scrollWidth / 2;
+        }
+      }
+      animationId = requestAnimationFrame(autoScroll);
+    };
+
+    animationId = requestAnimationFrame(autoScroll);
+    return () => cancelAnimationFrame(animationId);
+  }, [isDown, isHovered]);
+
+  const handleMouseDown = (e) => {
+    setIsDown(true);
+    setStartX(e.pageX - trackRef.current.offsetLeft);
+    setScrollLeft(trackRef.current.scrollLeft);
+  };
+
+  const handleMouseLeave = () => {
+    setIsDown(false);
+    setIsHovered(false);
+  };
+
+  const handleMouseUp = () => {
+    setIsDown(false);
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - trackRef.current.offsetLeft;
+    const walk = (x - startX) * 1.5; // Drag speed
+    trackRef.current.scrollLeft = scrollLeft - walk;
+  };
 
   return (
     <div className="section" style={{ paddingTop: '5rem', paddingBottom: '6rem', overflow: 'hidden' }}>
@@ -57,7 +113,15 @@ export default function Testimonials() {
         </p>
 
         <div className="marquee-wrapper entry-scale-in" style={{ animationDelay: '0.4s' }}>
-          <div className="marquee-track">
+          <div 
+            className="marquee-track"
+            ref={trackRef}
+            onMouseDown={handleMouseDown}
+            onMouseLeave={handleMouseLeave}
+            onMouseUp={handleMouseUp}
+            onMouseMove={handleMouseMove}
+            onMouseEnter={() => setIsHovered(true)}
+          >
           {testimonials.map((t, idx) => (
             <div key={`${t.id}-${idx}`} className="testimonial-card marquee-item">
               <div className="client-image-container">
@@ -81,7 +145,6 @@ export default function Testimonials() {
         /* Marquee Styles */
         .marquee-wrapper {
           width: 100%;
-          overflow: hidden;
           position: relative;
           padding: 1rem 0;
           mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
@@ -90,23 +153,33 @@ export default function Testimonials() {
 
         .marquee-track {
           display: flex;
-          width: max-content;
+          width: 100%;
+          overflow-x: auto;
+          overflow-y: hidden;
           gap: 2.5rem;
-          animation: scrollMarquee 100s linear infinite;
+          /* Hide scrollbar */
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+          cursor: grab;
         }
 
-        .marquee-track:hover {
-          animation-play-state: paused;
+        .marquee-track::-webkit-scrollbar {
+          display: none;
         }
 
-        @keyframes scrollMarquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(calc(-50% - 1.25rem)); } /* Scrolls exactly half the total track width including gap */
+        .marquee-track:active {
+          cursor: grabbing;
         }
 
         .marquee-item {
           width: 320px;
           flex-shrink: 0;
+          /* Protect from pointer events bug when dragging out of bounds */
+          user-select: none;
+        }
+        
+        .client-image-display {
+          pointer-events: none; /* Prevents dragging the image file instead of scrolling */
         }
 
         .testimonial-card {
