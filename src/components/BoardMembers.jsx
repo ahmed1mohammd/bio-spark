@@ -77,8 +77,8 @@ export default function BoardMembers() {
           position: relative;
           border-radius: 24px;
           text-align: center;
-          padding: 6rem 2.5rem 2.5rem 2.5rem;
-          margin-top: 60px; /* Space for the floating avatar */
+          padding: 7rem 2.5rem 2.5rem 2.5rem;
+          margin-top: 80px; /* Space for the floating avatar */
           background: rgba(10, 25, 50, 0.7);
           border: 1px solid rgba(255, 255, 255, 0.08);
           box-shadow: 0 10px 40px rgba(0,0,0,0.2);
@@ -89,11 +89,11 @@ export default function BoardMembers() {
 
         .floating-avatar {
           position: absolute;
-          top: -75px;
+          top: -90px;
           left: 50%;
           transform: translateX(-50%);
-          width: 150px;
-          height: 150px;
+          width: 180px;
+          height: 180px;
           border-radius: 50%;
           border: 4px solid var(--accent-cyan);
           padding: 5px;
