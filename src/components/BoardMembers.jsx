@@ -106,6 +106,7 @@ export default function BoardMembers() {
           width: 100%;
           height: 100%;
           object-fit: cover;
+          object-position: center top; /* Ensures the top of the photo (like heads) doesn't get cropped */
           border-radius: 50%;
         }
 
