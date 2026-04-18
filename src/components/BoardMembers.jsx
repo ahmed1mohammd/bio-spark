@@ -77,8 +77,8 @@ export default function BoardMembers() {
           position: relative;
           border-radius: 24px;
           text-align: center;
-          padding: 9rem 2.5rem 2.5rem 2.5rem;
-          margin-top: 110px; /* Space for the floating avatar */
+          padding: 8.5rem 2.5rem 2.5rem 2.5rem;
+          margin-top: 120px; /* Space for the floating avatar */
           background: rgba(10, 25, 50, 0.7);
           border: 1px solid rgba(255, 255, 255, 0.08);
           box-shadow: 0 10px 40px rgba(0,0,0,0.2);
@@ -89,12 +89,12 @@ export default function BoardMembers() {
 
         .floating-avatar {
           position: absolute;
-          top: -125px;
+          top: -120px;
           left: 50%;
           transform: translateX(-50%);
-          width: 180px;
-          height: 260px;
-          border-radius: 16px;
+          width: 240px;
+          height: 240px;
+          border-radius: 50%;
           border: 4px solid var(--accent-cyan);
           padding: 5px;
           background: #001428; /* Matching the site dark bg to prevent transparency issues */
@@ -106,7 +106,7 @@ export default function BoardMembers() {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          border-radius: 12px;
+          border-radius: 50%;
         }
 
         .team-content {
