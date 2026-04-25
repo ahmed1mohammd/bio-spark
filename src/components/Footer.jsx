@@ -17,7 +17,7 @@ export default function Footer() {
               Transforming traditional science education through immersive, high-tech biological and chemical modules. We bring the laboratory to your classroom.
             </p>
             <div className="social-links">
-              <a href="#https://www.facebook.com/share/1CSaTSwNqG/" aria-label="Facebook" className="social-btn" target="_blank" rel="noopener noreferrer"><FaFacebookF /></a>
+              <a href="https://www.facebook.com/share/1BAxxzyTwt/" aria-label="Facebook" className="social-btn" target="_blank" rel="noopener noreferrer"><FaFacebookF /></a>
               <a href="https://www.instagram.com/bio_spark01/" aria-label="Instagram" className="social-btn" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
               <a href="https://www.tiktok.com/@biospark2?is_from_webapp=1&sender_device=pc" aria-label="TikTok" className="social-btn" target="_blank" rel="noopener noreferrer"><FaTiktok /></a>
             </div>
