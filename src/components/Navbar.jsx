@@ -64,6 +64,7 @@ export default function Navbar() {
             </div>
 
             <a href="/#board" className="nav-link">Team</a>
+            <a href="/#contact" className="nav-link">Contact</a>
             
             <a href="https://wa.me/201140866774" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ marginLeft: '1rem', padding: '0.6rem 1.6rem' }}>
               Get Started
@@ -106,6 +107,7 @@ export default function Navbar() {
           </div>
 
           <a href="/#board" className="mobile-link" onClick={() => setMobileMenuOpen(false)}>Team</a>
+          <a href="/#contact" className="mobile-link" onClick={() => setMobileMenuOpen(false)}>Contact</a>
           <a href="https://wa.me/201140866774" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ marginTop: '2.5rem', width: '100%', padding: '1rem', fontSize: '1.2rem', textAlign: 'center' }} onClick={() => setMobileMenuOpen(false)}>
             Get Started
           </a>

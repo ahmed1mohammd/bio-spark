@@ -1,0 +1,392 @@
+.contact-section {
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+  background: var(--primary-blue);
+  background: radial-gradient(circle at 50% 50%, #0564c2 0%, #012b7d 100%);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Section Header */
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-title {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 15px;
+  letter-spacing: -1px;
+}
+
+.section-title .highlight {
+  color: var(--accent-cyan);
+  position: relative;
+}
+
+.title-underline {
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan));
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+/* Contact Grid */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 30px;
+  align-items: stretch;
+}
+
+/* Left Panel: Contact Info */
+.contact-info-panel {
+  padding: 40px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05); /* Enhanced glassmorphism */
+}
+
+.dna-icon-float {
+  width: 80px;
+  height: 80px;
+  background: rgba(132, 194, 51, 0.15);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+  animation: float 4s ease-in-out infinite;
+}
+
+.dna-svg {
+  color: var(--accent-cyan);
+  filter: drop-shadow(0 0 10px rgba(132, 194, 51, 0.5));
+}
+
+.contact-info-panel h3 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.contact-info-panel p {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 40px;
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.detail-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 15px;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.03);
+  transition: all 0.3s ease;
+}
+
+.detail-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateX(10px);
+}
+
+.icon-box {
+  width: 50px;
+  height: 50px;
+  background: var(--primary-blue);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-cyan);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.detail-text span {
+  display: block;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--accent-cyan);
+  margin-bottom: 4px;
+}
+
+.detail-text p {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+}
+
+/* Right Panel: Form */
+.contact-form-panel {
+  padding: 50px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 15px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: white;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 20px rgba(132, 194, 51, 0.1);
+}
+
+.submit-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 18px;
+  font-size: 1.1rem;
+  gap: 12px;
+}
+
+.send-icon {
+  transition: transform 0.3s ease;
+}
+
+.submit-btn:hover .send-icon {
+  transform: translate(5px, -5px);
+}
+
+/* DNA Background Animation */
+.dna-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.4;
+}
+
+.dna-strand {
+  position: absolute;
+  width: 40px;
+  height: 200px;
+  background: linear-gradient(to bottom, var(--accent-green), var(--accent-cyan));
+  filter: blur(40px);
+  border-radius: 50%;
+  animation: dna-float 15s linear infinite;
+}
+
+.dna-1 {
+  top: 10%;
+  left: 5%;
+  animation-duration: 20s;
+}
+
+.dna-2 {
+  bottom: 10%;
+  right: 5%;
+  animation-delay: -5s;
+  background: var(--light-blue);
+}
+
+.dna-3 {
+  top: 40%;
+  right: 15%;
+  animation-duration: 25s;
+  animation-delay: -10s;
+  background: var(--accent-cyan);
+}
+
+/* Rotating DNA Helix */
+.dna-helix-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.15;
+}
+
+.helix {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) rotate(-30deg);
+  width: 80px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.dna-helix-container.left .helix {
+  left: 3%;
+}
+
+.dna-helix-container.right .helix {
+  right: 3%;
+  transform: translateY(-50%) rotate(30deg);
+}
+
+.dot {
+  position: relative;
+  width: 100%;
+  height: 10px;
+  display: flex;
+  justify-content: space-between;
+  animation: rotate-dot 3s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 0.1s);
+}
+
+.dot::before, .dot::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+  box-shadow: 0 0 10px var(--accent-cyan);
+}
+
+.dot::after {
+  background: var(--accent-green);
+  box-shadow: 0 0 10px var(--accent-green);
+}
+
+@keyframes rotate-dot {
+  0%, 100% { transform: scaleX(1) rotate(0deg); }
+  50% { transform: scaleX(-1) rotate(180deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes dna-float {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(100px, 100px) rotate(120deg); }
+  66% { transform: translate(-50px, 200px) rotate(240deg); }
+  100% { transform: translate(0, 0) rotate(360deg); }
+}
+
+/* Status Alerts */
+.status-alert {
+  display: flex;
+  gap: 15px;
+  padding: 20px;
+  border-radius: 15px;
+  margin-top: 25px;
+  animation: slideUp 0.4s ease-out;
+}
+
+.status-alert.success {
+  background: rgba(101, 169, 46, 0.1);
+  border: 1px solid rgba(101, 169, 46, 0.2);
+}
+
+.status-alert.error {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.alert-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.success .alert-icon { background: var(--accent-green); color: white; }
+.error .alert-icon { background: #ef4444; color: white; }
+
+.alert-content h4 {
+  margin-bottom: 5px;
+  font-size: 1.1rem;
+}
+
+.alert-content p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.95rem;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-section {
+    padding: 60px 0;
+  }
+  
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .contact-info-panel,
+  .contact-form-panel {
+    padding: 30px;
+  }
+}

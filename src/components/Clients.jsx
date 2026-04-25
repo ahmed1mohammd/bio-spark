@@ -1,14 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { fetchData, API_ENDPOINTS } from '../utils/api';
 
 export default function Clients() {
-  const clients = [
-    { id: 1, name: "Cambridge Academy", initials: "CA" },
-    { id: 2, name: "Oxford Int.", initials: "OI" },
-    { id: 3, name: "St. Marys", initials: "SM" },
-    { id: 4, name: "Bright Future", initials: "BF" },
-    { id: 5, name: "Newton High", initials: "NH" },
-    { id: 6, name: "Pioneer STEM", initials: "PS" },
-  ];
+  const [clients, setClients] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const getClients = async () => {
+      try {
+        const result = await fetchData(API_ENDPOINTS.CUSTOMERS);
+        setClients(result?.data || []);
+      } catch (err) {
+        console.error('Failed to load clients:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getClients();
+  }, []);
 
   return (
     <div className="section" style={{ paddingTop: '2rem', paddingBottom: '4rem' }}>
@@ -18,20 +27,27 @@ export default function Clients() {
         </h5>
         <h2 style={{ marginBottom: '3rem', fontSize: '2rem' }}>Our Partners</h2>
 
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', 
-          gap: '2.5rem',
-          alignItems: 'center',
-          justifyItems: 'center'
-        }}>
-          {clients.map((client) => (
-            <div key={client.id} className="client-logo" title={client.name}>
-              <div style={{ fontWeight: '800', fontSize: '2rem', letterSpacing: '1px' }}>{client.initials}</div>
-              <div style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '1px', marginTop: '0.4rem', fontWeight: '500' }}>{client.name}</div>
-            </div>
-          ))}
-        </div>
+        {loading ? (
+          <div style={{ color: 'var(--text-secondary)' }}>Loading partners...</div>
+        ) : (
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', 
+            gap: '2.5rem',
+            alignItems: 'center',
+            justifyItems: 'center'
+          }}>
+            {clients.map((client) => (
+              <div key={client._id} className="client-logo">
+                <img 
+                  src={client.imageUrl} 
+                  alt="Partner Logo" 
+                  style={{ width: '100%', maxWidth: '120px', height: 'auto', objectFit: 'contain' }} 
+                />
+              </div>
+            ))}
+          </div>
+        )}
       </div>
       
       <style>{`

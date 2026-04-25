@@ -1,75 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { FaWhatsapp } from 'react-icons/fa';
+import { fetchData, API_ENDPOINTS } from '../utils/api';
 
 export default function ProductsPage() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [activeCategory, setActiveCategory] = useState('All');
 
   const categories = ['All', '3D Product', 'Edutainment', 'Puzzles'];
 
   useEffect(() => {
-    setTimeout(() => {
-      setProducts([
-        {
-          id: 1,
-          title: "3D Human Heart Model",
-          category: "3D Product",
-          description: "A highly detailed and interactive 3D model of the human heart, perfect for exploring cardiovascular anatomy and function.",
-          image: "https://i.ibb.co/tpt9hvQf/Whats-App-Image-2026-04-16-at-11-48-52-PM.jpg"
-        },
-        {
-          id: 2,
-          title: "3D Plant Cell",
-          category: "3D Product",
-          description: "Immersive 3D model showcasing the intricate structure, organelles, and functions of a plant cell.",
-          image: "https://i.ibb.co/SW9wvPD/Whats-App-Image-2026-04-17-at-4-28-16-PM.jpg"
-        },
-        {
-          id: 3,
-          title: "3D Animal Cell",
-          category: "3D Product",
-          description: "Interactive 3D visualization of animal cell components, providing a hands-on approach to cellular biology.",
-          image: "https://i.ibb.co/V0xykhsW/Whats-App-Image-2026-04-17-at-4-13-53-PM.jpg"
-        },
-        {
-          id: 4,
-          title: "DNA-Shaped Pencil Case",
-          category: "3D Product",
-          description: "A unique and functional 3D-printed pencil case designed as a DNA double helix, perfect for organizing your stationery with a scientific flair.",
-          image: "https://i.ibb.co/8DzL48Hq/Whats-App-Image-2026-04-17-at-3-14-55-PM.jpg"
-        },
-        {
-          id: 5,
-          title: "Pins",
-          category: "Edutainment",
-          description: "Stylish, biology-themed pins merging education with fun accessories.",
-          image: "https://i.ibb.co/kR6JV0j/Whats-App-Image-2026-04-17-at-3-36-01-PM-1.jpg"
-        },
-        {
-          id: 6,
-          title: "Pins",
-          category: "Edutainment",
-          description: "Educational pin set featuring molecular and cellular designs.",
-          image: "https://i.ibb.co/Xkj03B8F/Whats-App-Image-2026-04-17-at-3-36-00-PM.jpg"
-        },
-        {
-          id: 7,
-          title: "Creative Bio Pins",
-          category: "Edutainment",
-          description: "High-quality, uniquely designed pins that celebrate the wonders of biology, perfect for customizing your backpacks and lab coats.",
-          image: "https://i.ibb.co/7NYLMvJT/Whats-App-Image-2026-04-17-at-11-20-02-PM.jpg"
-        },
-        {
-          id: 8,
-          title: "Human body anatomy",
-          category: "Puzzles",
-          description: "Challenging puzzle to learn and explore human body anatomy interactively.",
-          image: "https://i.ibb.co/w1wfwT0/Whats-App-Image-2026-04-17-at-3-52-51-PM.jpg"
-        }
-      ]);
-      setLoading(false);
-    }, 600);
+    const getProducts = async () => {
+      try {
+        const result = await fetchData(API_ENDPOINTS.PRODUCTS);
+        setProducts(result.data);
+      } catch (err) {
+        setError('Failed to load products. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getProducts();
   }, []);
 
   const filteredProducts = activeCategory === 'All'
@@ -113,17 +66,17 @@ export default function ProductsPage() {
         ) : (
           <div className="products-grid">
             {filteredProducts.map((product) => (
-              <div key={product.id} className="glass-panel interactive" style={{
+              <div key={product._id} className="glass-panel interactive" style={{
                 overflow: 'hidden',
                 display: 'flex',
                 flexDirection: 'column',
                 borderRadius: '24px',
               }}>
-                <div style={{ height: '280px', width: '100%', overflow: 'hidden', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+                <div style={{ height: '280px', width: '100%', overflow: 'hidden', borderBottom: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.02)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <img
-                    src={product.image}
+                    src={product.imageUrl}
                     alt={product.title}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }}
+                    style={{ width: '100%', height: '100%', objectFit: 'contain', transition: 'transform 0.5s ease' }}
                     onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.1)'}
                     onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
                   />

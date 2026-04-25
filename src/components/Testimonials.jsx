@@ -1,15 +1,55 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FaStar } from 'react-icons/fa';
+import { fetchData, API_ENDPOINTS } from '../utils/api';
 
 export default function Testimonials() {
-  const scrollRef = React.useRef(null);
-  const [isDragging, setIsDragging] = React.useState(false);
-  const [startX, setStartX] = React.useState(0);
-  const [scrollLeft, setScrollLeft] = React.useState(0);
+  const scrollRef = useRef(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+  const [testimonials, setTestimonials] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const startDrag = (x) => {
+    setIsDragging(true);
+    setStartX(x - (scrollRef.current?.offsetLeft || 0));
+    setScrollLeft(scrollRef.current?.scrollLeft || 0);
+  };
+
+  const endDrag = () => {
+    setIsDragging(false);
+  };
+
+  const onDrag = (x) => {
+    if (!isDragging || !scrollRef.current) return;
+    const xPos = x - (scrollRef.current.offsetLeft || 0);
+    const walk = (xPos - startX) * 2;
+    scrollRef.current.scrollLeft = scrollLeft - walk;
+  };
+
+  useEffect(() => {
+    const getReviews = async () => {
+      try {
+        const result = await fetchData(API_ENDPOINTS.REVIEWS);
+        // Duplicate items to create a seamless infinite scroll effect
+        const data = result?.data || [];
+        if (data.length > 0) {
+          // We duplicate only once (total 2x) to allow the infinite scroll loop
+          // to work smoothly without showing too many repetitions.
+          setTestimonials([...data, ...data]);
+        }
+      } catch (err) {
+        console.error('Failed to load testimonials:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getReviews();
+  }, []);
 
   // Auto-scroll loop
-  React.useEffect(() => {
-    if (isDragging) return;
+  useEffect(() => {
+    if (isDragging || testimonials.length === 0) return;
     const interval = setInterval(() => {
       if (scrollRef.current) {
         scrollRef.current.scrollLeft += 1;
@@ -17,80 +57,9 @@ export default function Testimonials() {
            scrollRef.current.scrollLeft = 0;
         }
       }
-    }, 20); // 50 frames per second
+    }, 20);
     return () => clearInterval(interval);
-  }, [isDragging]);
-
-  const startDrag = (pageX) => {
-    setIsDragging(true);
-    setStartX(pageX - scrollRef.current.offsetLeft);
-    setScrollLeft(scrollRef.current.scrollLeft);
-  };
-
-  const endDrag = () => setIsDragging(false);
-
-  const onDrag = (pageX) => {
-    if (!isDragging) return;
-    const x = pageX - scrollRef.current.offsetLeft;
-    const walk = (x - startX) * 1.5;
-    let newScrollLeft = scrollLeft - walk;
-
-    // Handle backwards infinite loop
-    if (newScrollLeft <= 0) {
-       newScrollLeft += scrollRef.current.scrollWidth / 2;
-    }
-    // Handle forwards infinite loop
-    if (newScrollLeft >= scrollRef.current.scrollWidth / 2) {
-       newScrollLeft -= scrollRef.current.scrollWidth / 2;
-    }
-    scrollRef.current.scrollLeft = newScrollLeft;
-  };
-
-  const baseTestimonials = [
-    {
-      id: 1,
-      image: "https://i.ibb.co/XZNhSFR8/IMG-8386.jpg",
-    },
-    {
-      id: 2,
-      image: "https://i.ibb.co/h1B5gckv/20260305-145533-jpg.jpg",
-    },
-    {
-      id: 3,
-      image: "https://i.ibb.co/YFZGtcmx/Whats-App-Image-2026-04-18-at-2-00-13-AM.jpg",
-    },
-    {
-      id: 4,
-      image: "https://i.ibb.co/8hRQVFq/Whats-App-Image-2026-04-18-at-1-53-10-AM.jpg",
-    },
-    {
-      id: 5,
-      image: "https://i.ibb.co/XkrbwL0T/de4e52b5-3c5f-4d9e-9734-1834c0ae69e8.jpg",
-    },
-    {
-      id: 6,
-      image: "https://i.ibb.co/gFBJh7VY/20260305-150138-jpg.jpg",
-    },
-    {
-      id: 7,
-      image: "https://i.ibb.co/LhYR8LV5/Whats-App-Image-2026-04-18-at-1-53-05-AM.jpg",
-    },
-    {
-      id: 8,
-      image: "https://i.ibb.co/twqBCFJW/660c0256-bead-4a4a-b17f-9f3605c172bd.jpg",
-    },
-    {
-      id: 9,
-      image: "https://i.ibb.co/qLDJH6jW/da8635d6-4d84-4561-8055-1ade8325cace.jpg",
-    },
-    {
-      id: 10,
-      image: "https://i.ibb.co/60gPK2GZ/0749e3c7-590e-42ab-a45d-c5b158b4b865.jpg",
-    }
-  ];
-
-  /* Duplicate items to create a seamless infinite scroll effect */
-  const testimonials = [...baseTestimonials, ...baseTestimonials, ...baseTestimonials, ...baseTestimonials];
+  }, [isDragging, testimonials]);
 
   return (
     <div className="section" style={{ paddingTop: '5rem', paddingBottom: '6rem', overflow: 'hidden' }}>
@@ -114,11 +83,11 @@ export default function Testimonials() {
           onTouchMove={(e) => onDrag(e.touches[0].pageX)}
         >
           <div className="marquee-track">
-          {testimonials.map((t, idx) => (
-            <div key={`${t.id}-${idx}`} className="testimonial-card marquee-item">
-              <div className="client-image-container">
-                <img src={t.image} alt="Experience Showcase" className="client-image-display" />
-              </div>
+            {testimonials.map((t, idx) => (
+              <div key={`${t._id}-${idx}`} className="testimonial-card marquee-item">
+                <div className="client-image-container">
+                  <img src={t.imageUrl} alt="Experience Showcase" className="client-image-display" />
+                </div>
               
               <div className="client-info-section" style={{ justifyContent: 'center' }}>
                 <div className="stars-container">

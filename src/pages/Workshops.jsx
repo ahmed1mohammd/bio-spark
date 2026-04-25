@@ -1,34 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { FaWhatsapp } from 'react-icons/fa';
+import { fetchData, API_ENDPOINTS } from '../utils/api';
 
 export default function Workshops() {
   const [workshops, setWorkshops] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    setTimeout(() => {
-      setWorkshops([
-        { 
-          id: 1, 
-          title: "DNA Extraction Kit", 
-          description: "This hands-on workshop introduces students to the basics of DNA extraction, allowing them to isolate DNA using simple techniques. Students will explore the importance of DNA and connect theory with real-life applications in genetics and biotechnology.", 
-          image: "https://i.ibb.co/xKVkGspT/Whats-App-Image-2026-04-16-at-9-55-07-PM.jpg" 
-        },
-        { 
-          id: 2, 
-          title: "Microbe Detective kit", 
-          description: "This hands-on workshop introduces students to essential microbiology techniques, including microbial isolation, streaking methods, and basic staining. Participants will gain practical lab experience while exploring how microorganisms are studied and identified.", 
-          image: "https://i.ibb.co/NnSbW7Gd/Whats-App-Image-2026-04-16-at-9-55-07-PM-1.jpg" 
-        },
-        { 
-          id: 3, 
-          title: "ELISA Kit", 
-          description: "This hands-on workshop introduces students to the basics of ELISA technique, allowing them to detect and measure specific proteins or antibodies. Participants will gain practical experience and understand its applications in diagnostics and research.", 
-          image: "https://i.ibb.co/21RqV3SP/Whats-App-Image-2026-04-16-at-9-55-08-PM.jpg" 
-        }
-      ]);
-      setLoading(false);
-    }, 800);
+    const getWorkshops = async () => {
+      try {
+        const result = await fetchData(API_ENDPOINTS.WORKSHOPS);
+        setWorkshops(result?.data || []);
+      } catch (err) {
+        setError('Failed to load workshops. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getWorkshops();
   }, []);
 
   return (
@@ -46,17 +37,17 @@ export default function Workshops() {
         ) : (
           <div className="workshops-grid">
             {workshops.map((ws) => (
-              <div key={ws.id} className="glass-panel interactive" style={{ 
+              <div key={ws._id} className="glass-panel interactive" style={{ 
                 overflow: 'hidden',
                 display: 'flex',
                 flexDirection: 'column',
                 borderRadius: '16px',
               }}>
-                <div style={{ height: '220px', width: '100%', overflow: 'hidden' }}>
+                <div style={{ height: '220px', width: '100%', overflow: 'hidden', background: 'rgba(255,255,255,0.02)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <img 
-                    src={ws.image} 
+                    src={ws.imageUrl} 
                     alt={ws.title} 
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }}
+                    style={{ width: '100%', height: '100%', objectFit: 'contain', transition: 'transform 0.5s ease' }}
                     onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.1)'}
                     onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
                   />

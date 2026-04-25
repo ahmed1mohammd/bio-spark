@@ -1,32 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowDown, ArrowRight } from 'lucide-react';
+import { fetchData, API_ENDPOINTS } from '../utils/api';
 
 export default function Articles() {
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const getArticles = async () => {
+      try {
+        const result = await fetchData(API_ENDPOINTS.ARTICLES);
+        setArticles(result?.data || []);
+      } catch (err) {
+        console.error('Failed to load articles:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getArticles();
+  }, []);
+
   const scrollToArticle = (e) => {
     e.preventDefault();
     document.getElementById('main-article').scrollIntoView({ behavior: 'smooth' });
   };
-
-  const moreArticles = [
-    {
-      id: 1,
-      title: "The Role of 3D Models in Science Education",
-      desc: "How visualizing abstract structures changes the way students grasp complex biological mechanisms.",
-      img: "https://images.unsplash.com/photo-1507413245164-6160d8298b31?auto=format&fit=crop&q=80&w=600"
-    },
-    {
-      id: 2,
-      title: "Preparing Students for Biotech Careers",
-      desc: "Why early exposure to practical biotechnology paves the way for innovation in medical fields.",
-      img: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=600"
-    },
-    {
-      id: 3,
-      title: "Empowering Educators with Hands-on Kits",
-      desc: "Bringing theoretical classes to life through out-of-the-box laboratory experiments.",
-      img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=600"
-    }
-  ];
 
   return (
     <div className="articles-page">
@@ -48,10 +45,12 @@ export default function Articles() {
         </div>
       </div>
 
-      {/* Main Article Section */}
-      <div className="articles-main-bg" id="main-article">
+      {/* Main Introductory Article (Static) */}
+      <div className="article-entry-bg" id="main-article" style={{
+        background: 'radial-gradient(circle at 10% 50%, rgba(5, 100, 194, 0.4) 0%, transparent 60%), linear-gradient(180deg, #0564c2 0%, #004391 100%)'
+      }}>
         <div className="section article-section">
-          <div className="glass-panel reading-panel">
+          <div className="glass-panel reading-panel entry-fade-in">
             <h2 className="article-title">BioSpark: Transforming Biotechnology Education for the Future</h2>
             
             <div className="article-content">
@@ -67,7 +66,7 @@ export default function Articles() {
                 Through a combination of interactive content and hands-on approaches, BioSpark empowers students to actively engage with science rather than passively consume information. This approach helps learners develop deeper understanding, critical thinking skills, and real-world awareness—key competencies required in the modern biotech landscape.
               </p>
 
-              <h3>One of the core strengths of BioSpark lies in its diverse and innovative product ecosystem:</h3>
+              <h3 style={{ color: 'white', fontSize: '1.4rem', margin: '3rem 0 1.5rem 0' }}>One of the core strengths of BioSpark lies in its diverse and innovative product ecosystem:</h3>
 
               <div className="bullet-point">
                 <h4>Interactive Biotech Content</h4>
@@ -106,28 +105,48 @@ export default function Articles() {
         </div>
       </div>
 
-      {/* Articles Grid Section */}
-      <div className="articles-grid-bg">
-        <div className="section">
-          <h2 className="grid-section-title">More Articles & News</h2>
-          <div className="grid-cards articles-grid">
-            {moreArticles.map(article => (
-              <div key={article.id} className="glass-panel interactive article-card">
-                <div className="card-image-wrapper">
-                  <img src={article.img} alt={article.title} />
-                  <div className="card-image-overlay"></div>
-                </div>
-                <div className="card-content">
-                  <h4 className="card-title">{article.title}</h4>
-                  <p className="card-desc">{article.desc}</p>
-                  <a href="#" className="read-more-link" onClick={e => e.preventDefault()}>
-                    Read More <ArrowRight size={16} />
-                  </a>
+      {/* Dynamic Articles List */}
+      <div className="articles-list">
+        {loading ? (
+          <div className="section" style={{ textAlign: 'center', padding: '5rem' }}>
+            <div className="loader" style={{ margin: '0 auto 1.5rem' }}></div>
+            <p style={{ color: 'var(--text-secondary)' }}>Loading more articles...</p>
+          </div>
+        ) : (
+          articles.map((article, index) => (
+            <div key={article._id} className="article-entry-bg" id={`article-${article._id}`} style={{
+              background: index % 2 !== 0 ? 
+                'radial-gradient(circle at 10% 50%, rgba(5, 100, 194, 0.4) 0%, transparent 60%), linear-gradient(180deg, #0564c2 0%, #004391 100%)' :
+                'radial-gradient(circle at 90% 80%, rgba(101, 169, 46, 0.2) 0%, transparent 70%), linear-gradient(135deg, #004391 0%, #002b77 100%)'
+            }}>
+              <div className="section article-section">
+                <div className="glass-panel reading-panel entry-fade-in">
+                  
+                  {article.imageUrl && (
+                    <div className="article-image-main">
+                      <img src={article.imageUrl} alt={article.title} />
+                      <div className="image-caption">News & Updates</div>
+                    </div>
+                  )}
+
+                  <h2 className="article-title">{article.title}</h2>
+                  
+                  <div className="article-content" style={{ whiteSpace: 'pre-wrap' }}>
+                    {article.description}
+                  </div>
+
+                  {article.registrationLink && (
+                    <div className="article-cta" style={{ marginTop: '3rem', textAlign: 'center' }}>
+                      <a href={article.registrationLink} target="_blank" rel="noopener noreferrer" className="btn-primary">
+                        Follow Up <ArrowRight size={18} style={{ marginLeft: '0.5rem' }} />
+                      </a>
+                    </div>
+                  )}
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
+            </div>
+          ))
+        )}
       </div>
 
       <style>{`
@@ -135,113 +154,84 @@ export default function Articles() {
         .articles-page {
           overflow-x: hidden;
         }
-
+        
         .articles-hero-bg {
           background: 
             radial-gradient(circle at 80% 20%, rgba(0, 139, 240, 0.4) 0%, transparent 60%),
             linear-gradient(135deg, #012b7d 0%, #0564c2 100%);
           position: relative;
         }
-        
-        .articles-main-bg {
-          background: 
-            radial-gradient(circle at 10% 50%, rgba(5, 100, 194, 0.4) 0%, transparent 60%),
-            linear-gradient(180deg, #0564c2 0%, #004391 100%);
+
+        .article-entry-bg {
+          position: relative;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .articles-grid-bg {
-          background: 
-            radial-gradient(circle at 90% 80%, rgba(101, 169, 46, 0.2) 0%, transparent 70%),
-            linear-gradient(135deg, #004391 0%, #002b77 100%);
-        }
-
-        /* --- Hero Section --- */
-        .articles-hero {
-          min-height: 90vh;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          text-align: center;
-          padding-top: 8rem;
-        }
-
-        .hero-content {
-          max-width: 900px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-
-        .hero-content h1 {
-          font-size: clamp(3rem, 6vw, 4.5rem);
-          color: white;
-          margin-bottom: 2rem;
-          line-height: 1.1;
-          text-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-
-        .hero-content .subtext {
-          font-size: 1.3rem;
-          color: var(--text-secondary);
-          margin-bottom: 1rem;
-          line-height: 1.6;
-          max-width: 800px;
-        }
-
-        .hero-content .additional-text {
-          font-size: 1.1rem;
-          color: rgba(255, 255, 255, 0.7);
-          margin-bottom: 3rem;
-          line-height: 1.5;
-          max-width: 750px;
-        }
-
-        .scroll-btn {
-          gap: 0.6rem;
-          padding: 0.9rem 2rem;
-          font-size: 1.1rem;
-        }
-
-        /* --- Main Article Section --- */
+        /* --- Article Section --- */
         .article-section {
-          padding-top: 4rem;
-          padding-bottom: 6rem;
+          padding-top: 6rem;
+          padding-bottom: 8rem;
           max-width: 1000px;
         }
 
         .reading-panel {
           padding: 4rem 5rem;
           background: rgba(0, 15, 40, 0.45);
+          border-radius: 40px;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+        }
+
+        .article-image-main {
+          width: calc(100% + 10rem);
+          margin-left: -5rem;
+          margin-top: -4rem;
+          margin-bottom: 4rem;
+          border-radius: 40px 40px 0 0;
+          overflow: hidden;
+          position: relative;
+          height: 450px;
+        }
+
+        .article-image-main img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .image-caption {
+          position: absolute;
+          bottom: 1.5rem;
+          right: 2rem;
+          background: rgba(0, 0, 0, 0.5);
+          backdrop-filter: blur(10px);
+          color: white;
+          padding: 0.5rem 1.2rem;
+          border-radius: 99px;
+          font-size: 0.9rem;
+          font-weight: 600;
+          border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .article-title {
-          font-size: clamp(2rem, 4vw, 2.8rem);
+          font-size: clamp(2.2rem, 5vw, 3.5rem);
           text-align: left;
-          margin-bottom: 3rem;
+          margin-bottom: 2.5rem;
           line-height: 1.25;
           color: white;
-          border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-          padding-bottom: 1.5rem;
+          font-weight: 800;
+          letter-spacing: -1px;
         }
 
         .article-content {
           color: var(--text-secondary);
-          font-size: 1.15rem;
+          font-size: 1.2rem;
           line-height: 1.8;
           text-align: left;
         }
 
         .article-content p {
           margin-bottom: 1.5rem;
-          font-size: 1.15rem;
-          color: var(--text-secondary);
-        }
-
-        .article-content h3 {
-          color: white;
-          font-size: 1.4rem;
-          margin: 3rem 0 1.5rem 0;
-          line-height: 1.4;
         }
 
         .bullet-point {
@@ -259,105 +249,36 @@ export default function Articles() {
         }
 
         .bullet-point p {
-          margin: 0;
+          margin: 0 !important;
           font-size: 1.05rem;
         }
 
-        /* --- Grid Section --- */
-        .grid-section-title {
-          text-align: center;
-          font-size: 2.5rem;
-          margin-bottom: 3.5rem;
+        /* --- Global Loader --- */
+        .loader {
+          width: 48px;
+          height: 48px;
+          border: 4px solid rgba(255,255,255,0.1);
+          border-top-color: var(--accent-green);
+          border-radius: 50%;
+          animation: spin 1s linear infinite;
         }
 
-        .articles-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-          gap: 2.5rem;
-        }
-
-        .article-card {
-          padding: 0;
-          display: flex;
-          flex-direction: column;
-          overflow: hidden;
-        }
-
-        .card-image-wrapper {
-          position: relative;
-          height: 200px;
-          overflow: hidden;
-        }
-
-        .card-image-wrapper img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          transition: transform 0.5s ease;
-        }
-        
-        .article-card:hover img {
-          transform: scale(1.05);
-        }
-
-        .card-image-overlay {
-          position: absolute;
-          top: 0; left: 0; right: 0; bottom: 0;
-          background: linear-gradient(to top, rgba(0, 20, 50, 0.5) 0%, transparent 100%);
-        }
-
-        .card-content {
-          padding: 2rem;
-          display: flex;
-          flex-direction: column;
-          flex: 1;
-        }
-
-        .card-title {
-          color: white;
-          font-size: 1.35rem;
-          margin-bottom: 1rem;
-          line-height: 1.3;
-        }
-
-        .card-desc {
-          font-size: 1rem;
-          margin-bottom: 2rem;
-          flex: 1;
-        }
-
-        .read-more-link {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          color: var(--light-blue);
-          text-decoration: none;
-          font-weight: 600;
-          transition: color 0.3s ease;
-        }
-
-        .read-more-link:hover {
-          color: white;
-        }
-        
-        .read-more-link svg {
-          transition: transform 0.3s ease;
-        }
-        
-        .read-more-link:hover svg {
-          transform: translateX(4px);
-        }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
         /* Responsive Adjustments */
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
           .reading-panel {
-            padding: 2.5rem 1.5rem;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+          }
+          .article-image-main {
+            width: calc(100% + 4rem);
+            margin-left: -2rem;
+            margin-top: -3rem;
+            height: 300px;
           }
           .article-title {
-            font-size: 2rem;
-          }
-          .bullet-point {
-            padding: 1rem;
+            font-size: 2.2rem;
           }
         }
       `}</style>

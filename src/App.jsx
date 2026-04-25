@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
+import VisitorModal from './components/VisitorModal';
 import Home from './pages/Home';
 import Events from './pages/Events';
 import Workshops from './pages/Workshops';
@@ -27,6 +28,7 @@ function App() {
 
         <Footer />
         <FloatingWhatsApp />
+        <VisitorModal />
       </div>
     </Router>
   );

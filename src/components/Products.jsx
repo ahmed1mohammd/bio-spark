@@ -1,42 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { FaWhatsapp } from 'react-icons/fa';
 import { ArrowRight, Sparkles, Dna, FlaskConical, Microscope, Atom } from 'lucide-react';
+import { fetchData, API_ENDPOINTS } from '../utils/api';
 
 export default function Products() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Simulate API fetch
   useEffect(() => {
-    setTimeout(() => {
-      setProducts([
-        {
-          id: 1,
-          title: "3D Human Heart Model",
-          badge: "3D Product",
-          icon: <Atom size={24} />,
-          description: "A highly detailed and interactive 3D model of the human heart, perfect for exploring cardiovascular anatomy and function.",
-          image: "https://i.ibb.co/tpt9hvQf/Whats-App-Image-2026-04-16-at-11-48-52-PM.jpg"
-        },
-        {
-          id: 2,
-          title: "Creative Bio Pins",
-          badge: "Edutainment",
-          icon: <Sparkles size={24} />,
-          description: "High-quality, uniquely designed pins that celebrate the wonders of biology, perfect for customizing your backpacks and lab coats.",
-          image: "https://i.ibb.co/7NYLMvJT/Whats-App-Image-2026-04-17-at-11-20-02-PM.jpg"
-        },
-        {
-          id: 3,
-          title: "Human Body Anatomy",
-          badge: "Puzzles",
-          icon: <Dna size={24} />,
-          description: "Challenging puzzle to learn and explore human body anatomy interactively.",
-          image: "https://i.ibb.co/w1wfwT0/Whats-App-Image-2026-04-17-at-3-52-51-PM.jpg"
-        }
-      ]);
-      setLoading(false);
-    }, 800);
+    const getProducts = async () => {
+      try {
+        // Fetch only first 3 products for the home page
+        const result = await fetchData(API_ENDPOINTS.PRODUCTS);
+        const data = result?.data || [];
+        // Add default icons since the database doesn't store JSX components
+        const icons = [<Atom size={24} />, <Sparkles size={24} />, <Dna size={24} />];
+        const updatedData = data.map((p, index) => ({
+          ...p,
+          icon: icons[index % icons.length]
+        }));
+        
+        setProducts(updatedData);
+      } catch (err) {
+        console.error('Failed to load home products:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getProducts();
   }, []);
 
   return (
@@ -72,11 +64,11 @@ export default function Products() {
       ) : (
         <div className="products-grid">
           {products.map((product) => (
-            <div key={product.id} className="product-card glass-panel interactive">
+            <div key={product._id} className="product-card glass-panel interactive">
               <div className="product-image-container">
                 <div className="product-image-glow"></div>
-                <img src={product.image} alt={product.title} className="product-item-img float-slow" />
-                <div className="product-badge">{product.badge}</div>
+                <img src={product.imageUrl} alt={product.title} className="product-item-img float-slow" />
+                <div className="product-badge">{product.category}</div>
                 <div className="product-icon">{product.icon}</div>
               </div>
               

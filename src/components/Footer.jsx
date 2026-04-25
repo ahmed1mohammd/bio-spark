@@ -29,7 +29,7 @@ export default function Footer() {
             <ul className="footer-links">
               <li><Link to="/products" onClick={() => window.scrollTo(0, 0)}>Our Packages</Link></li>
               <li><Link to="/experiments" onClick={() => window.scrollTo(0, 0)}>Individual Experiments</Link></li>
-              <li><Link to="/events" onClick={() => window.scrollTo(0, 0)}>Events & Shows</Link></li>
+              <li><Link to="/events" onClick={() => window.scrollTo(0, 0)}>Events& Shows</Link></li>
               <li><Link to="/articles" onClick={() => window.scrollTo(0, 0)}>Articles & News</Link></li>
             </ul>
           </div>

@@ -7,6 +7,7 @@ import Products from '../components/Products';
 import BoardMembers from '../components/BoardMembers';
 import Clients from '../components/Clients';
 import Testimonials from '../components/Testimonials';
+import Contact from '../components/Contact';
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
       <section id="products"><Products /></section>
       <section id="testimonials"><Testimonials /></section>
       <section id="board"><BoardMembers /></section>
+      <Contact />
     </>
   );
 }
