@@ -13,16 +13,6 @@ const defaultLeadership = [
     linkedin: "https://www.linkedin.com/in/zyad-khalil-856071288?trk=contact-info",
     facebook: "https://www.facebook.com/share/1BAxxzyTwt/",
     tiktok: "https://www.tiktok.com/@biospark2?is_from_webapp=1&sender_device=pc"
-  },
-  {
-    _id: '2',
-    name: "Dr- Manar",
-    role: "Co-founder & Academic Director",
-    description: "Science communicator turning complex biology into fun, hands-on scientific experiences.",
-    image: "https://i.ibb.co/tM3SJCFR/8e9c6115-2587-41b6-a9bf-36f459d64454.jpg",
-    linkedin: "#", 
-    facebook: "https://www.facebook.com/share/1BAxxzyTwt/", 
-    tiktok: "https://www.tiktok.com/@biospark2?is_from_webapp=1&sender_device=pc"
   }
 ];
 
