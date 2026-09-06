@@ -1,5 +1,6 @@
 import React from 'react';
 import { Eye, Dna, Hand, Sparkles, Presentation, Atom } from 'lucide-react';
+import Card3D from './Card3D';
 
 export default function WhyChooseUs() {
   const reasons = [
@@ -16,9 +17,9 @@ export default function WhyChooseUs() {
       color: 'var(--accent-green)'
     },
     {
-      icon: Hand,
-      title: "Interactive & Hands-On Approach",
-      description: "From experiments to workshops, BioSpark turns students into active learners, not passive listeners.",
+      icon: Eye,
+      title: "Learn by Seeing, Not Memorizing",
+      description: "We transform complex biology into clear visual experiences through interactive content and 3D models, making learning intuitive and engaging.",
       color: 'var(--light-blue)'
     },
     {
@@ -63,7 +64,7 @@ export default function WhyChooseUs() {
         {reasons.map((reason, index) => {
           const Icon = reason.icon;
           return (
-            <div key={index} className="bento-card glass-panel" style={{ '--card-color': reason.color }}>
+            <Card3D key={index} className="bento-card" style={{ '--card-color': reason.color }}>
               <div className="card-number">0{index + 1}</div>
               
               <div className="icon-wrapper">
@@ -72,7 +73,7 @@ export default function WhyChooseUs() {
               
               <h3 className="bento-title">{reason.title}</h3>
               <p className="bento-desc">{reason.description}</p>
-            </div>
+            </Card3D>
           );
         })}
       </div>

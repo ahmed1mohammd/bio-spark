@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FaChevronDown } from 'react-icons/fa';
-import { Dna } from 'lucide-react';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -15,13 +14,11 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu gracefully on route change
   useEffect(() => {
     setMobileMenuOpen(false);
     setDropdownOpen(false);
   }, [location]);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -42,8 +39,11 @@ export default function Navbar() {
 
           {/* Desktop Nav */}
           <nav className="desktop-nav">
-            <Link to="/" className="nav-link">Home</Link>
-            <a href="/#about" className="nav-link">About</a>
+            <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}>Home</Link>
+            <Link to="/for-schools" className={`nav-link ${location.pathname === '/for-schools' ? 'active' : ''}`}>For Schools</Link>
+            <Link to="/workshops" className={`nav-link ${location.pathname === '/workshops' ? 'active' : ''}`}>Workshops</Link>
+            <Link to="/camps" className={`nav-link ${location.pathname === '/camps' ? 'active' : ''}`}>Camps</Link>
+            <Link to="/shop" className={`nav-link ${location.pathname === '/shop' || location.pathname === '/products' ? 'active' : ''}`}>Shop</Link>
             
             {/* Desktop Dropdown */}
             <div 
@@ -56,17 +56,15 @@ export default function Navbar() {
               </button>
               
               <div className={`dropdown-content ${dropdownOpen ? 'show' : ''}`}>
-                <Link to="/products" className={`drop-link ${location.pathname === '/products' ? 'active' : ''}`}>Products</Link>
-                <Link to="/workshops" className={`drop-link ${location.pathname === '/workshops' ? 'active' : ''}`}>Workshops</Link>
                 <Link to="/events" className={`drop-link ${location.pathname === '/events' ? 'active' : ''}`}>Events</Link>
                 <Link to="/articles" className={`drop-link ${location.pathname === '/articles' ? 'active' : ''}`}>Articles & News</Link>
               </div>
             </div>
 
-            <a href="/#board" className="nav-link">Team</a>
-            <a href="/#contact" className="nav-link">Contact</a>
+            <Link to="/about" className="nav-link">About</Link>
+            <Link to="/contact" className="nav-link">Contact</Link>
             
-            <a href="https://wa.me/201140866774" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ marginLeft: '1rem', padding: '0.6rem 1.6rem' }}>
+            <a href="https://wa.me/201140866774" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ marginLeft: '0.8rem', padding: '0.6rem 1.4rem' }}>
               Get Started
             </a>
           </nav>
@@ -88,7 +86,10 @@ export default function Navbar() {
       <div className={`mobile-menu ${mobileMenuOpen ? 'open' : ''}`}>
         <div className="mobile-nav-items">
           <Link to="/" className="mobile-link" onClick={() => setMobileMenuOpen(false)}>Home</Link>
-          <a href="/#about" className="mobile-link" onClick={() => setMobileMenuOpen(false)}>About</a>
+          <Link to="/for-schools" className="mobile-link" onClick={() => setMobileMenuOpen(false)}>For Schools</Link>
+          <Link to="/workshops" className="mobile-link" onClick={() => setMobileMenuOpen(false)}>Workshops</Link>
+          <Link to="/camps" className="mobile-link" onClick={() => setMobileMenuOpen(false)}>Camps</Link>
+          <Link to="/shop" className="mobile-link" onClick={() => setMobileMenuOpen(false)}>Shop</Link>
           
           <div className="mobile-dropdown">
             <button 
@@ -99,22 +100,20 @@ export default function Navbar() {
               Explore <FaChevronDown size={14} className={`chevron ${dropdownOpen ? 'open' : ''}`} />
             </button>
             <div className={`mobile-dropdown-content ${dropdownOpen ? 'show' : ''}`}>
-              <Link to="/products" className={`mobile-sublink ${location.pathname === '/products' ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)}>Products</Link>
-              <Link to="/workshops" className={`mobile-sublink ${location.pathname === '/workshops' ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)}>Workshops</Link>
-              <Link to="/events" className={`mobile-sublink ${location.pathname === '/events' ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)}>Events</Link>
-              <Link to="/articles" className={`mobile-sublink ${location.pathname === '/articles' ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)}>Articles & News</Link>
+              <Link to="/events" className="mobile-sublink" onClick={() => setMobileMenuOpen(false)}>Events</Link>
+              <Link to="/articles" className="mobile-sublink" onClick={() => setMobileMenuOpen(false)}>Articles & News</Link>
             </div>
           </div>
 
-          <a href="/#board" className="mobile-link" onClick={() => setMobileMenuOpen(false)}>Team</a>
-          <a href="/#contact" className="mobile-link" onClick={() => setMobileMenuOpen(false)}>Contact</a>
-          <a href="https://wa.me/201140866774" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ marginTop: '2.5rem', width: '100%', padding: '1rem', fontSize: '1.2rem', textAlign: 'center' }} onClick={() => setMobileMenuOpen(false)}>
+          <Link to="/about" className="mobile-link" onClick={() => setMobileMenuOpen(false)}>About</Link>
+          <Link to="/contact" className="mobile-link" onClick={() => setMobileMenuOpen(false)}>Contact</Link>
+          
+          <a href="https://wa.me/201140866774" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ marginTop: '2rem', width: '100%', padding: '1rem', fontSize: '1.2rem', textAlign: 'center' }} onClick={() => setMobileMenuOpen(false)}>
             Get Started
           </a>
         </div>
       </div>
 
-      {/* Scoped CSS styling for Navbar */}
       <style>{`
         /* Core Navbar Styles */
         .navbar {
@@ -147,7 +146,7 @@ export default function Navbar() {
 
         .nav-logo {
           text-decoration: none;
-          z-index: 1001; /* Keep above overlay */
+          z-index: 1001;
           display: flex;
           align-items: center;
         }
@@ -156,7 +155,7 @@ export default function Navbar() {
         .desktop-nav {
           display: flex;
           align-items: center;
-          gap: 2.2rem;
+          gap: 1.8rem;
         }
 
         .nav-link {
@@ -170,7 +169,7 @@ export default function Navbar() {
           cursor: pointer;
           font-family: inherit;
         }
-        .nav-link:hover {
+        .nav-link:hover, .nav-link.active {
           color: var(--accent-green);
         }
 
@@ -234,10 +233,6 @@ export default function Navbar() {
           color: var(--accent-green);
           transform: translateX(4px);
         }
-        .drop-link.active {
-          color: var(--accent-green);
-          background: rgba(0,0,0,0.04);
-        }
 
         /* Mobile Hamburger */
         .hamburger-btn {
@@ -248,7 +243,7 @@ export default function Navbar() {
           width: 32px;
           height: 24px;
           position: relative;
-          z-index: 1001; /* Keep above overlay */
+          z-index: 1001;
           padding: 0;
         }
         .hamburger-btn span {
@@ -316,14 +311,14 @@ export default function Navbar() {
         .mobile-link {
           color: white;
           text-decoration: none;
-          font-size: 1.8rem;
+          font-size: 1.5rem;
           font-weight: 700;
-          padding: 1.2rem 0;
+          padding: 1rem 0;
           border-bottom: 1px solid rgba(255,255,255,0.08);
           display: block;
           text-align: left;
           background: none;
-          border-top: none; border-left: none; border-right: none;
+          border: none;
           font-family: inherit;
           cursor: pointer;
           transition: color 0.3s;
@@ -358,9 +353,6 @@ export default function Navbar() {
           color: white;
           background: rgba(255,255,255,0.08);
           transform: translateX(4px);
-        }
-        .mobile-sublink.active {
-          color: var(--accent-cyan);
         }
 
         @media (max-width: 900px) {

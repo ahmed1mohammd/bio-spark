@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Dna, Atom, Hexagon, Activity, Share2 } from 'lucide-react';
 
 export default function Hero() {
@@ -64,34 +65,35 @@ export default function Hero() {
 
       {/* Foreground Content */}
       <div className="hero-center-content">
-        
         <div className="hero-character-wrapper entry-scale-in">
           <div className="character-glow"></div>
           <img 
             src="/herosec.png" 
-            alt="Spark Character" 
+            alt="BioSpark Biotechnology" 
             className="animated-character"
+            onError={(e) => { e.target.src = '/main.png'; }}
           />
         </div>
 
         <div className="hero-text-wrapper entry-fade-in">
-          <h1 className="hero-h1">Biology, Brought to <span className="highlight-green">Life.</span></h1>
+          <h1 className="hero-h1">Biology & Biotechnology Brought to <span className="highlight-green">Life.</span></h1>
           
           <div className="typing-container-centered">
             <p className="hero-subtext">
-              Transforming traditional lessons into <br/>
+              Transforming traditional lessons into{' '}
               <span className="typed-word-centered">{text}</span>
               <span className="cursor">|</span>
             </p>
           </div>
           
           <div className="hero-actions">
-            <a href="https://wa.me/201140866774?text=Hello, I am interested in Bio Spark programs." target="_blank" rel="noopener noreferrer" className="btn-primary btn-pulse-center">
-              Book Now
-            </a>
-            <a href="/articles" className="hero-sec-btn">
-              Explore
-            </a>
+            <Link to="/for-schools" className="btn-primary btn-pulse-center">
+              For Schools
+            </Link>
+
+            <Link to="/shop" className="hero-sec-btn">
+              Shop
+            </Link>
           </div>
         </div>
       </div>
@@ -164,7 +166,7 @@ export default function Hero() {
 
         .bio-elem {
           position: absolute;
-          transform: translate(-50%, -50%); /* Base positioning before counter loop */
+          transform: translate(-50%, -50%);
           display: flex; align-items: center; justify-content: center;
           border-radius: 50%;
           background: rgba(255, 255, 255, 0.03);
@@ -246,20 +248,26 @@ export default function Hero() {
         }
 
         .hero-text-wrapper {
-          max-width: 800px;
+          max-width: 1100px;
           display: flex;
           flex-direction: column;
           align-items: center;
         }
 
         .hero-h1 {
-          font-size: clamp(2.8rem, 5vw, 4.8rem);
+          font-size: clamp(2rem, 4.2vw, 3.8rem);
           color: white;
-          line-height: 1.1;
-          margin-bottom: 0.5rem;
+          line-height: 1.2;
+          margin-bottom: 0.6rem;
           font-weight: 800;
           text-shadow: 0 4px 20px rgba(0,0,0,0.4);
-          letter-spacing: -1px;
+          letter-spacing: -0.5px;
+        }
+
+        @media (min-width: 992px) {
+          .hero-h1 {
+            white-space: nowrap;
+          }
         }
 
         .highlight-green {

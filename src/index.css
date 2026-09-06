@@ -49,11 +49,25 @@ p {
 }
 
 .section {
-  padding: 6rem 2rem;
+  padding: 3rem 2rem;
   max-width: 1280px;
   margin: 0 auto;
   position: relative;
   z-index: 10;
+}
+
+/* Uniform Card Sizing & Stretch Height Across Grid Layouts */
+.card-3d-wrapper, .school-card-3d-wrapper, .workshop-card, .camp-card, .product-card, .board-card {
+  width: 100%;
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.grid-cards, .workshops-grid, .workshops-3d-grid, .products-grid, .camps-grid, .schools-3d-grid, .audience-grid, .programs-grid {
+  display: grid;
+  align-items: stretch;
+  justify-items: stretch;
 }
 
 .hero-section {
@@ -206,4 +220,163 @@ p {
   background: 
     radial-gradient(circle at 50% 0%, rgba(0, 67, 145, 0.4) 0%, transparent 60%),
     linear-gradient(135deg, #004391 0%, #002b77 100%);
+}
+
+/* ==========================================================================
+   UNIFORM GLOBAL CARD SIZING & ALIGNMENT FOR THE ENTIRE WEBSITE
+   ========================================================================== */
+
+/* 1. All Card Grids: Consistent Grid Column Templates & Gap */
+.grid-cards,
+.workshops-grid,
+.workshops-3d-grid,
+.products-grid,
+.camps-grid,
+.schools-3d-grid,
+.audience-grid,
+.programs-grid,
+.events-grid,
+.articles-grid,
+.board-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+  gap: 2rem !important;
+  align-items: stretch !important;
+  justify-items: stretch !important;
+}
+
+/* 2. All Card Outer Containers: Equal Height & Width */
+.card-3d-wrapper,
+.school-card-3d-wrapper,
+.workshop-card,
+.camp-card,
+.product-card,
+.board-card,
+.event-card,
+.article-card,
+.why-card,
+.vision-card {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  margin: 0 !important;
+}
+
+/* 3. Card Inner Panels: Glass panels flex stretch */
+.card-3d-inner,
+.glass-panel.interactive,
+.school-card-inner,
+.workshop-card-inner,
+.camp-card-inner,
+.product-card-inner {
+  width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  border-radius: var(--card-radius) !important;
+  overflow: hidden !important;
+}
+
+/* 4. Card Media / Image Wrappers & Images: Uniform 220px Height */
+.card-media,
+.workshop-img-container,
+.camp-img-container,
+.product-img-container,
+.school-card-img-container {
+  width: 100% !important;
+  height: 220px !important;
+  overflow: hidden !important;
+  position: relative !important;
+  flex-shrink: 0 !important;
+}
+
+.card-3d-wrapper img,
+.school-card-3d-wrapper img,
+.workshop-img,
+.workshop-img-container img,
+.camp-card img,
+.product-card img,
+.event-card img,
+.article-card img,
+.board-card img {
+  width: 100% !important;
+  height: 220px !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block !important;
+}
+
+/* 5. Card Content Wrappers: Flex Fill with Column Direction */
+.card-content,
+.card-3d-content,
+.workshop-content,
+.camp-content,
+.product-content,
+.school-card-content,
+.board-content,
+.event-content,
+.article-content {
+  padding: 1.5rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 1 auto !important;
+  justify-content: space-between !important;
+}
+
+/* 6. Titles: Uniform font-size & 2-line clamp */
+.card-content h3,
+.card-3d-content h3,
+.workshop-title,
+.camp-title,
+.product-title,
+.card-title,
+.board-name,
+.event-title,
+.article-title {
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  line-height: 1.4 !important;
+  margin-bottom: 0.75rem !important;
+  color: #ffffff !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  min-height: 3.5rem !important;
+}
+
+/* 7. Descriptions: Uniform 3-line clamp & fixed height block */
+.card-content p,
+.card-3d-content p,
+.workshop-desc,
+.camp-desc,
+.product-desc,
+.card-desc,
+.board-bio,
+.event-desc,
+.article-desc {
+  font-size: 0.95rem !important;
+  line-height: 1.5 !important;
+  color: var(--text-secondary) !important;
+  margin-bottom: 1.25rem !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 3 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  min-height: 4.3rem !important;
+}
+
+/* 8. Footer & CTA Buttons: Pushed to bottom across all cards */
+.card-footer,
+.card-actions,
+.workshop-btn-cta,
+.camp-btn-cta,
+.product-btn-cta,
+.card-btn,
+.event-btn,
+.article-btn {
+  margin-top: auto !important;
+  width: 100% !important;
 }

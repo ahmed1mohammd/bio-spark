@@ -1,51 +1,56 @@
 import React from 'react';
 import { Target, Eye } from 'lucide-react';
+import Card3D from './Card3D';
 
 export default function MissionVision() {
   return (
-    <div className="section mv-section" style={{ overflow: 'hidden' }}>
+    <div className="section mv-section">
       
       <div className="mv-container">
         
         {/* Connection Line / Bridge */}
         <div className="mv-connection-bridge"></div>
 
-        {/* Mission Card (Animate from left) */}
-        <div className="mv-card mv-mission entry-slide-left interactive">
-          <img src="/main.png" alt="Bio Spark Icon" className="floating-mascot mascot-left" />
-          <div className="mv-card-glow glow-blue"></div>
-          <div className="mv-card-content glass-panel-custom">
-            <div className="mv-icon-wrapper icon-blue">
-              <Target size={32} />
+        {/* Mission Card */}
+        <div className="mv-card-outer entry-slide-left">
+          <img src="/main.png" alt="Bio Spark Mascot" className="floating-mascot mascot-left" />
+          <Card3D className="mv-card mv-mission">
+            <div className="mv-card-glow glow-blue"></div>
+            <div className="mv-card-content glass-panel-custom">
+              <div className="mv-icon-wrapper icon-blue">
+                <Target size={32} />
+              </div>
+              <h2 className="mv-title">Our Mission</h2>
+              <p className="mv-desc">
+                To simplify biotechnology education through interactive and engaging experiences that combine science with real-world applications—empowering students to understand, apply, and enjoy biology beyond the classroom.
+              </p>
             </div>
-            <h2 className="mv-title">Our Mission</h2>
-            <p className="mv-desc">
-              To simplify biotechnology education through interactive and engaging experiences that combine science with real-world applications—empowering students to understand, apply, and enjoy biology beyond the classroom.
-            </p>
-          </div>
+          </Card3D>
         </div>
 
-        {/* Vision Card (Animate from right) */}
-        <div className="mv-card mv-vision entry-slide-right interactive">
-          <img src="/main.png" alt="Bio Spark Icon" className="floating-mascot mascot-right" />
-          <div className="mv-card-glow glow-green-blue"></div>
-          <div className="mv-card-content glass-panel-custom glass-green-accent">
-            <div className="mv-icon-wrapper icon-green">
-              <Eye size={32} />
+        {/* Vision Card */}
+        <div className="mv-card-outer entry-slide-right">
+          <img src="/main.png" alt="Bio Spark Mascot" className="floating-mascot mascot-right" />
+          <Card3D className="mv-card mv-vision">
+            <div className="mv-card-glow glow-green-blue"></div>
+            <div className="mv-card-content glass-panel-custom glass-green-accent">
+              <div className="mv-icon-wrapper icon-green">
+                <Eye size={32} />
+              </div>
+              <h2 className="mv-title">Our Vision</h2>
+              <p className="mv-desc">
+                To become a leading edutainment platform in biotechnology, transforming how science is taught and experienced, and inspiring the next generation of innovators across Egypt and beyond.
+              </p>
             </div>
-            <h2 className="mv-title">Our Vision</h2>
-            <p className="mv-desc">
-              To become a leading edutainment platform in biotechnology, transforming how science is taught and experienced, and inspiring the next generation of innovators across Egypt and beyond.
-            </p>
-          </div>
+          </Card3D>
         </div>
 
       </div>
 
       <style>{`
         .mv-section {
-          padding-top: 4rem;
-          padding-bottom: 8rem;
+          padding-top: 6rem;
+          padding-bottom: 6rem;
           position: relative;
         }
 
@@ -73,10 +78,18 @@ export default function MissionVision() {
           box-shadow: 0 0 15px rgba(101, 169, 46, 0.4);
         }
 
-        .mv-card {
+        .mv-card-outer {
           flex: 1;
           position: relative;
           max-width: 500px;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .mv-card {
+          flex: 1;
+          position: relative;
+          width: 100%;
         }
 
         .mv-card-glow {
@@ -100,7 +113,7 @@ export default function MissionVision() {
           -webkit-backdrop-filter: blur(15px);
           border: 1px solid rgba(255, 255, 255, 0.1);
           border-radius: 30px;
-          padding: 3.5rem 3rem;
+          padding: 3.2rem 2.8rem;
           display: flex;
           flex-direction: column;
           transition: all 0.4s ease;
@@ -131,6 +144,8 @@ export default function MissionVision() {
           display: flex; align-items: center; justify-content: center;
           margin-bottom: 2rem;
           color: white;
+          position: relative;
+          z-index: 2;
         }
 
         .icon-blue {
@@ -146,16 +161,22 @@ export default function MissionVision() {
         .mv-title {
           font-size: 2.2rem;
           color: white;
-          margin-bottom: 1.2rem;
+          margin-bottom: 1.5rem;
           font-weight: 700;
+          text-align: center;
+          position: relative;
+          z-index: 2;
         }
 
         .mv-desc {
-          font-size: 1.15rem;
+          font-size: 1.1rem;
           color: var(--text-secondary);
-          line-height: 1.7;
+          line-height: 1.75;
+          text-align: left;
           flex: 1;
           margin: 0;
+          position: relative;
+          z-index: 2;
         }
 
         .entry-slide-left { animation: slideInLeft 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
@@ -172,51 +193,45 @@ export default function MissionVision() {
         }
 
         .floating-mascot {
-          position: absolute;
-          width: 110px;
-          z-index: 10;
-          filter: drop-shadow(0 10px 15px rgba(0,0,0,0.4));
+          position: absolute !important;
+          width: 80px !important;
+          height: auto !important;
+          top: -28px !important;
+          right: 15px !important;
+          z-index: 50 !important;
+          filter: drop-shadow(0 6px 12px rgba(0,0,0,0.4));
           animation: floatMascot 4s ease-in-out infinite;
           pointer-events: none;
         }
 
-        .mascot-left {
-          top: -45px;
-          right: -25px;
-        }
-
         .mascot-right {
-          top: -45px;
-          right: -25px;
-          animation-delay: 1s; /* Offset the animation so they don't bounce exactly at the same time */
+          animation-delay: 1s;
         }
 
         @keyframes floatMascot {
           0%, 100% { transform: translateY(0) rotate(0deg); }
-          50% { transform: translateY(-12px) rotate(4deg); }
+          50% { transform: translateY(-6px) rotate(3deg); }
         }
 
         @media (max-width: 900px) {
           .mv-container {
             flex-direction: column;
             align-items: center;
-            gap: 2.5rem;
+            gap: 3.5rem;
           }
           .mv-connection-bridge {
             width: 3px;
-            height: 100px; /* Vertical connector for mobile! */
+            height: 100px;
             background: linear-gradient(180deg, var(--light-blue), var(--accent-green));
             opacity: 0.4;
           }
           .mv-card-content {
-             padding: 3rem 2.5rem;
+             padding: 2.8rem 2rem;
           }
           .floating-mascot {
-             width: 80px;
-          }
-          .mascot-left, .mascot-right {
-             top: -35px;
-             right: -10px;
+             width: 65px !important;
+             top: -22px !important;
+             right: 10px !important;
           }
         }
       `}</style>

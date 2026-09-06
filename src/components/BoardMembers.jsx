@@ -1,174 +1,294 @@
 import React, { useState, useEffect } from 'react';
 import { FaLinkedin, FaFacebook, FaTiktok } from 'react-icons/fa';
+import { Dna } from 'lucide-react';
+import { fetchBoardMembers } from '../services/api';
+
+const defaultLeadership = [
+  {
+    _id: '1',
+    name: "Dr_Zeee",
+    role: "CEO & Founder | Lab Specialist",
+    description: "Biotechnology expert passionate about interactive STEM learning and science communication.",
+    image: "https://i.ibb.co/Swf7dWKP/1253ad67-7fdc-438e-b138-3945c710d495.jpg",
+    linkedin: "https://www.linkedin.com/in/zyad-khalil-856071288?trk=contact-info",
+    facebook: "#",
+    tiktok: "#"
+  },
+  {
+    _id: '2',
+    name: "Dr- Manar",
+    role: "Co-founder & Academic Director",
+    description: "Science communicator turning complex biology into fun, hands-on scientific experiences.",
+    image: "https://i.ibb.co/tM3SJCFR/8e9c6115-2587-41b6-a9bf-36f459d64454.jpg",
+    linkedin: "#", facebook: "#", tiktok: "#"
+  },
+  {
+    _id: '3',
+    name: "Eng. Mohamed Nabil",
+    role: "Board Member & STEM Lead",
+    description: "STEM educator and entrepreneur focused on impactful biological education.",
+    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
+    linkedin: "#", facebook: "#", tiktok: "#"
+  },
+  {
+    _id: '4',
+    name: "Dr. Rana Hassan",
+    role: "Board Member & Curriculum Head",
+    description: "Biotech researcher specializing in modern school science curriculum development.",
+    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80",
+    linkedin: "#", facebook: "#", tiktok: "#"
+  },
+  {
+    _id: '5',
+    name: "Omar Walid",
+    role: "Board Member & Innovation Advocate",
+    description: "Youth advocate for scientific communication, biotechnology, and youth innovation.",
+    image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=400&q=80",
+    linkedin: "#", facebook: "#", tiktok: "#"
+  }
+];
 
 export default function BoardMembers() {
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => {
-      setMembers([
-        {
-          id: 1,
-          name: "Dr_Zeee",
-          role: "CEO & Founder | Science Communicator | Lab Specialist",
-          description: "Driven by a passion to make science accessible, interactive, and beautifully engaging for all ages.",
-          image: "https://i.ibb.co/Swf7dWKP/1253ad67-7fdc-438e-b138-3945c710d495.jpg",
-          imagePosition: "center top",
-          linkedin: "https://www.linkedin.com/in/zyad-khalil-856071288?trk=contact-info",
-          facebook: "https://www.facebook.com/share/1WK8z3N1bD/?mibextid=wwXIfr",
-          tiktok: "https://www.tiktok.com/@zyadmarcello?is_from_webapp=1&sender_device=pc"
-        },
-        {
-          id: 2,
-          name: "Dr- Manar",
-          role: "Co-founder",
-          description: "I'm a science communicator who can turn biology into fun and interactive experiences, and also let you experiment and explore everything on your own.",
-          image: "https://i.ibb.co/tM3SJCFR/8e9c6115-2587-41b6-a9bf-36f459d64454.jpg",
-          imagePosition: "center 30%",
-          linkedin: "#", facebook: "#", tiktok: "#"
+    async function loadMembers() {
+      try {
+        const res = await fetchBoardMembers();
+        if (res?.data?.data && res.data.data.length > 0) {
+          setMembers(res.data.data);
+        } else {
+          setMembers(defaultLeadership);
         }
-      ]);
-      setLoading(false);
-    }, 600);
+      } catch (err) {
+        console.error('Error fetching board members:', err);
+        setMembers(defaultLeadership);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadMembers();
   }, []);
 
   return (
-    <div className="section" style={{ paddingTop: '8rem', paddingBottom: '8rem' }}>
-      <div className="container" style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1.5rem' }}>
-        <h2 style={{ textAlign: 'center', marginBottom: '6rem', fontSize: '2.5rem' }}>The Minds Behind Bio Spark</h2>
+    <div className="leadership-container">
+      {/* Header Section */}
+      <div className="leadership-header">
+        <span className="leadership-tag">OUR LEADERSHIP</span>
+        <h2>Meet the <span className="highlight-green">BioSpark Board</span></h2>
         
-        {loading ? (
-          <div style={{ textAlign: 'center', padding: '2rem' }}>Loading team members...</div>
-        ) : (
-          <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', 
-            gap: '3rem',
-            maxWidth: '1000px',
-            margin: '0 auto'
-          }}>
-            {members.map(member => (
-              <div key={member.id} className="team-card glass-panel interactive">
-                <div className="floating-avatar">
-                  <img 
-                    src={member.image} 
-                    alt={member.name} 
-                    className="avatar-img"
-                    style={{ objectPosition: member.imagePosition || 'center' }}
-                  />
-                </div>
-                <div className="team-content">
-                  <h3 className="team-name">{member.name}</h3>
-                  <p className="team-role">{member.role}</p>
-                  <p className="team-desc">{member.description}</p>
-                  
-                  <div className="social-links">
-                    <a href={member.linkedin} className="social-icon" aria-label="LinkedIn"><FaLinkedin /></a>
-                    <a href={member.facebook} className="social-icon" aria-label="Facebook"><FaFacebook /></a>
-                    <a href={member.tiktok} className="social-icon" aria-label="TikTok"><FaTiktok /></a>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
+        {/* Decorative DNA Divider */}
+        <div className="dna-divider">
+          <div className="line"></div>
+          <Dna size={22} color="var(--accent-green)" className="dna-icon" />
+          <div className="line"></div>
+        </div>
       </div>
+      
+      {loading ? (
+        <div className="loading-spinner">Loading leadership team...</div>
+      ) : (
+        <div className="board-grid">
+          {members.map((member) => (
+            <div key={member._id || member.id} className="board-card glass-panel interactive">
+              <div className="avatar-wrapper">
+                <img 
+                  src={member.image || member.imageUrl} 
+                  alt={member.name} 
+                  className="board-avatar"
+                  onError={(e) => {
+                    e.target.src = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80';
+                  }}
+                />
+              </div>
+
+              <h3 className="member-name">{member.name}</h3>
+              <p className="member-role">{member.role}</p>
+              <p className="member-bio">{member.description || member.bio}</p>
+              
+              <div className="member-socials">
+                {member.linkedin && member.linkedin !== '#' && (
+                  <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="social-btn linkedin" aria-label="LinkedIn">
+                    <FaLinkedin size={18} />
+                  </a>
+                )}
+                {member.facebook && member.facebook !== '#' && (
+                  <a href={member.facebook} target="_blank" rel="noopener noreferrer" className="social-btn facebook" aria-label="Facebook">
+                    <FaFacebook size={18} />
+                  </a>
+                )}
+                {member.tiktok && member.tiktok !== '#' && (
+                  <a href={member.tiktok} target="_blank" rel="noopener noreferrer" className="social-btn tiktok" aria-label="TikTok">
+                    <FaTiktok size={18} />
+                  </a>
+                )}
+                {(!member.linkedin || member.linkedin === '#') && (!member.facebook || member.facebook === '#') && (
+                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="social-btn linkedin" aria-label="LinkedIn">
+                    <FaLinkedin size={18} />
+                  </a>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
 
       <style>{`
-        .team-card {
-          position: relative;
-          border-radius: 24px;
+        .leadership-container {
+          max-width: 1240px;
+          margin: 0 auto;
+          padding: 2rem 1rem;
+        }
+
+        .leadership-header {
           text-align: center;
-          padding: 8.5rem 2.5rem 2.5rem 2.5rem;
-          margin-top: 120px; /* Space for the floating avatar */
-          background: rgba(10, 25, 50, 0.7);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+          margin-bottom: 3.5rem;
+        }
+
+        .leadership-tag {
+          font-size: 0.85rem;
+          font-weight: 800;
+          letter-spacing: 1.5px;
+          color: var(--accent-green);
+          text-transform: uppercase;
+          display: inline-block;
+          margin-bottom: 0.5rem;
+        }
+
+        .leadership-header h2 {
+          font-size: clamp(2.2rem, 4vw, 3.2rem);
+          font-weight: 800;
+          color: #ffffff;
+          margin-bottom: 1rem;
+        }
+
+        .highlight-green {
+          color: var(--accent-green);
+        }
+
+        .dna-divider {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 1rem;
+          margin: 0 auto;
+          max-width: 280px;
+        }
+
+        .dna-divider .line {
+          height: 2px;
+          flex-grow: 1;
+          background: linear-gradient(90deg, transparent, rgba(101, 169, 46, 0.5), transparent);
+        }
+
+        .dna-icon {
+          animation: spinDNA 12s linear infinite;
+        }
+
+        @keyframes spinDNA {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+
+        .loading-spinner {
+          text-align: center;
+          padding: 3rem;
+          color: var(--text-secondary);
+        }
+
+        .board-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+          gap: 1.8rem;
+          justify-content: center;
+        }
+
+        .board-card {
+          border-radius: 20px;
+          padding: 2.2rem 1.5rem 1.8rem;
+          text-align: center;
           display: flex;
           flex-direction: column;
           align-items: center;
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+          transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
         }
 
-        .floating-avatar {
-          position: absolute;
-          top: -120px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 240px;
-          height: 240px;
+        .board-card:hover {
+          transform: translateY(-8px);
+          border-color: rgba(101, 169, 46, 0.4);
+          box-shadow: 0 20px 45px rgba(0, 139, 240, 0.25), 0 0 20px rgba(101, 169, 46, 0.2);
+        }
+
+        .avatar-wrapper {
+          width: 110px;
+          height: 110px;
           border-radius: 50%;
-          border: 4px solid var(--accent-cyan);
-          padding: 5px;
-          background: #001428; /* Matching the site dark bg to prevent transparency issues */
-          box-shadow: 0 15px 35px rgba(0, 139, 240, 0.35);
-          z-index: 10;
+          overflow: hidden;
+          margin-bottom: 1.2rem;
+          border: 3px solid var(--accent-green);
+          box-shadow: 0 8px 20px rgba(101, 169, 46, 0.3);
+          background: rgba(255, 255, 255, 0.1);
         }
 
-        .avatar-img {
+        .board-avatar {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          object-position: center top; /* Ensures the top of the photo (like heads) doesn't get cropped */
-          border-radius: 50%;
+          object-position: center top;
         }
 
-        .team-content {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          height: 100%;
-          width: 100%;
-        }
-
-        .team-name {
-          font-size: 1.6rem;
-          color: white;
-          margin-bottom: 0.4rem;
-        }
-
-        .team-role {
-          font-size: 1rem;
-          color: var(--accent-cyan);
-          font-weight: 600;
-          margin-bottom: 1.5rem;
-          text-transform: uppercase;
-          letter-spacing: 1px;
-        }
-
-        .team-desc {
-          font-size: 1.05rem;
-          color: var(--text-secondary);
-          line-height: 1.6;
-          margin-bottom: 2.5rem;
-          flex: 1;
-        }
-
-        .social-links {
-          display: flex;
-          gap: 1.5rem;
-          justify-content: center;
-          margin-top: auto;
-        }
-
-        .social-icon {
-          color: var(--text-secondary);
+        .member-name {
           font-size: 1.2rem;
-          transition: all 0.3s ease;
+          font-weight: 700;
+          color: #ffffff;
+          margin-bottom: 0.3rem;
+        }
+
+        .member-role {
+          font-size: 0.85rem;
+          font-weight: 700;
+          color: var(--accent-green);
+          margin-bottom: 0.8rem;
+          line-height: 1.3;
+        }
+
+        .member-bio {
+          font-size: 0.88rem;
+          color: var(--text-secondary);
+          line-height: 1.5;
+          margin-bottom: 1.5rem;
+          flex-grow: 1;
+        }
+
+        .member-socials {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 45px;
-          height: 45px;
-          border-radius: 50%;
-          background: rgba(255, 255, 255, 0.05);
+          gap: 0.75rem;
         }
 
-        .social-icon:hover {
-          color: white;
-          background: var(--accent-cyan);
-          transform: translateY(-4px);
-          box-shadow: 0 8px 20px rgba(0, 139, 240, 0.4);
+        .social-btn {
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          background: rgba(101, 169, 46, 0.15);
+          border: 1px solid rgba(101, 169, 46, 0.3);
+          color: var(--accent-green);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.2s ease;
+        }
+
+        .social-btn:hover {
+          background: var(--accent-green);
+          color: #ffffff;
+          transform: scale(1.1);
+          box-shadow: 0 4px 12px rgba(101, 169, 46, 0.4);
         }
       `}</style>
     </div>

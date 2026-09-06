@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchData, API_ENDPOINTS } from '../utils/api';
+import Card3D from '../components/Card3D';
 
 export default function Events() {
   const [events, setEvents] = useState([]);
@@ -29,7 +30,7 @@ export default function Events() {
         </p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
           {events.map(event => (
-            <div key={event._id} className="glass-panel interactive" style={{ overflow: 'hidden', borderRadius: '20px', display: 'flex', flexDirection: 'column' }}>
+            <Card3D key={event._id} style={{ overflow: 'hidden', borderRadius: '20px', display: 'flex', flexDirection: 'column' }}>
               <div style={{ width: '100%', height: '240px', background: 'rgba(255,255,255,0.02)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
                 <img 
                   src={event.imageUrl} 
@@ -40,8 +41,6 @@ export default function Events() {
                     objectFit: 'contain',
                     transition: 'transform 0.5s ease'
                   }} 
-                  onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-                  onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
                 />
               </div>
               <div style={{ padding: '1.5rem' }}>
@@ -53,7 +52,7 @@ export default function Events() {
                   </a>
                 )}
               </div>
-            </div>
+            </Card3D>
           ))}
         </div>
       </div>

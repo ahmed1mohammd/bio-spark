@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FaWhatsapp } from 'react-icons/fa';
 import { ArrowRight, Sparkles, Dna, FlaskConical, Microscope, Atom } from 'lucide-react';
 import { fetchData, API_ENDPOINTS } from '../utils/api';
+import Card3D from './Card3D';
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -64,7 +65,7 @@ export default function Products() {
       ) : (
         <div className="products-grid">
           {products.map((product) => (
-            <div key={product._id} className="product-card glass-panel interactive">
+            <Card3D key={product._id} className="product-card">
               <div className="product-image-container">
                 <div className="product-image-glow"></div>
                 <img src={product.imageUrl} alt={product.title} className="product-item-img float-slow" />
@@ -82,7 +83,7 @@ export default function Products() {
                   </a>
                 </div>
               </div>
-            </div>
+            </Card3D>
           ))}
         </div>
       )}
