@@ -3,7 +3,12 @@ import { Link } from 'react-router-dom';
 import { Dna, Atom, Hexagon, Activity, Share2 } from 'lucide-react';
 
 export default function Hero() {
-  const words = ["interactive labs.", "3D visualizations.", "live discovery.", "pure innovation."];
+  const words = [
+    "🧪 Hands-on Experiences",
+    "🔬 Interactive Learning",
+    "🌍 Real-World Applications",
+    "🚀 Innovation & Problem-Solving"
+  ];
   const [text, setText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
@@ -80,10 +85,12 @@ export default function Hero() {
           
           <div className="typing-container-centered">
             <p className="hero-subtext">
-              Transforming traditional lessons into{' '}
+              Transforming traditional lessons into:
+            </p>
+            <div className="animated-text-line">
               <span className="typed-word-centered">{text}</span>
               <span className="cursor">|</span>
-            </p>
+            </div>
           </div>
           
           <div className="hero-actions">
@@ -276,21 +283,32 @@ export default function Hero() {
         }
 
         .typing-container-centered {
-          min-height: 80px;
-          margin-bottom: 1.5rem;
+          min-height: 95px;
+          margin-bottom: 1.8rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
         }
 
         .hero-subtext {
           font-size: clamp(1.1rem, 2vw, 1.25rem);
           color: var(--text-secondary);
           line-height: 1.5;
-          margin: 0;
+          margin: 0 0 0.5rem 0;
+        }
+
+        .animated-text-line {
+          font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
         }
 
         .typed-word-centered {
           color: white;
           font-weight: 700;
           border-bottom: 2px solid var(--accent-green);
+          padding-bottom: 2px;
         }
 
         .cursor {

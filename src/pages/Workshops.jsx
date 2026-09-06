@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FaWhatsapp, FaClock, FaUsers, FaGraduationCap, FaFlask, FaSearch } from 'react-icons/fa';
 import { fetchData, API_ENDPOINTS } from '../utils/api';
+import DnaLoader from '../components/DnaLoader';
 
 // --- 3D Interactive Card strictly following BioSpark Design System ---
 const WorkshopCard3D = ({ ws }) => {
@@ -139,10 +140,49 @@ const WorkshopCard3D = ({ ws }) => {
   );
 };
 
+const DEFAULT_WORKSHOPS = [
+  {
+    _id: '1',
+    title: 'DNA Extraction & Electrophoresis Lab',
+    category: 'Genetics',
+    shortDescription: 'Isolate real DNA from strawberries and bacterial cells, run agarose gel electrophoresis, and analyze bands.',
+    description: 'Students learn micropipetting, gel preparation, DNA isolation, and UV transillumination visualization.',
+    imageUrl: '/main.png',
+    duration: '2 Hours',
+    targetGrade: 'Grades 7-12',
+    capacity: '30 Students',
+    keyTakeaways: ['Strawberry DNA Isolation', 'Gel Running', 'UV Transillumination', 'Lab Certificate']
+  },
+  {
+    _id: '2',
+    title: 'Microbiology & Bacterial Transformation',
+    category: 'Microbiology',
+    shortDescription: 'Transform E. coli bacteria to express Green Fluorescent Protein (GFP) under UV light.',
+    description: 'A hands-on workshop demonstrating plasmid insertion, heat shock technique, and antibiotic selection.',
+    imageUrl: '/herosec.png',
+    duration: '3 Hours',
+    targetGrade: 'Grades 9-12',
+    capacity: '25 Students',
+    keyTakeaways: ['Plasmid Insertion', 'Heat Shock Protocol', 'GFP Glow Visualization', 'Aseptic Technique']
+  },
+  {
+    _id: '3',
+    title: 'Cellular Structure & 3D Bio-Modeling',
+    category: 'Cell Biology',
+    shortDescription: 'Build 3D interactive cell structures, explore organelle functions, and examine live microscopic specimens.',
+    description: 'Middle and high school students build cell models and observe living paramecia and euglena.',
+    imageUrl: '/spark_character.png',
+    duration: '1.5 Hours',
+    targetGrade: 'Grades 5-9',
+    capacity: '35 Students',
+    keyTakeaways: ['Microscope Inspection', '3D Cell Models', 'Organelle Functions', 'Interactive Quiz']
+  }
+];
+
 // --- Main Workshops Page following BioSpark Theme ---
 export default function Workshops() {
-  const [workshops, setWorkshops] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [workshops, setWorkshops] = useState(DEFAULT_WORKSHOPS);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('All');
@@ -151,9 +191,11 @@ export default function Workshops() {
     const getWorkshops = async () => {
       try {
         const result = await fetchData(API_ENDPOINTS.WORKSHOPS);
-        setWorkshops(result?.data || []);
+        if (result?.data && result.data.length > 0) {
+          setWorkshops(result.data);
+        }
       } catch (err) {
-        setError('Failed to load workshops. Please try again later.');
+        console.error('Workshops fetch error:', err);
       } finally {
         setLoading(false);
       }
@@ -216,7 +258,7 @@ export default function Workshops() {
       {/* 3D Grid Section */}
       <section className="section workshops-grid-section">
         {loading ? (
-          <div className="loading-state" style={{ textAlign: 'center', padding: '4rem' }}>Loading workshops...</div>
+          <DnaLoader text="Loading Educational Workshops..." />
         ) : error ? (
           <div className="error-state" style={{ textAlign: 'center', padding: '4rem', color: '#ff4d4f' }}>{error}</div>
         ) : filteredWorkshops.length === 0 ? (

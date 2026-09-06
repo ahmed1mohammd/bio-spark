@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Building2, Users, FlaskConical, Globe, ChevronLeft, ChevronRight, Play, X, ArrowRight } from 'lucide-react';
+import { Building2, Users, FlaskConical, Globe, ChevronLeft, ChevronRight, Play, X, ArrowRight, GraduationCap, Award, Rocket, Microscope, UserCheck, Sparkles, Dna } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { fetchSiteContent, fetchCarousels } from '../services/api';
 import BoardMembers from '../components/BoardMembers';
@@ -155,59 +155,115 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 2. Who We Are & Metrics Section */}
+      {/* 2. About the Founder Section */}
       <section className="who-we-are-section" id="who-we-are">
-        <div className="who-we-are-grid">
-          {/* Left Column Text */}
-          <div className="who-text-col">
-            <span className="who-tag">Who We Are</span>
-            <h2 className="who-title">
-              BioSpark is more than a platform — <span className="text-green">we are a movement.</span>
-            </h2>
-            <p className="who-description">
-              {aboutContent?.story || 'We empower schools and students with innovative biotechnology education through mobile labs, interactive content, and real-world experiences.'}
-            </p>
-            <button className="learn-more-btn" onClick={() => navigate('/for-schools')}>
-              <span>Learn More About Us</span>
-              <ArrowRight size={18} />
-            </button>
-          </div>
+        <div className="founder-container">
+          <div className="founder-grid">
+            {/* Left Column: Founder Portrait */}
+            <div className="founder-image-col">
+              <div className="founder-card-frame">
+                <div className="founder-image-wrapper">
+                  <img 
+                    src="/dr-zee.jpg" 
+                    alt="Dr. Zee - Founder of BioSpark" 
+                    className="founder-portrait"
+                  />
+                  <div className="founder-overlay-gradient"></div>
+                </div>
 
-          {/* Right Column Stats Cards */}
-          <div className="metrics-grid">
-            <div className="metric-card glass-panel interactive">
-              <div className="metric-icon-box">
-                <Building2 size={30} color="var(--accent-green)" />
+                {/* Floating Badges */}
+                <div className="founder-badge founder-badge-bottom">
+                  <div className="badge-icon-spark">
+                    <Sparkles size={18} color="#73C52A" />
+                  </div>
+                  <div>
+                    <h4 className="badge-name">Dr. Zee</h4>
+                    <p className="badge-role">Founder & Biotech Specialist</p>
+                  </div>
+                </div>
+
+                <div className="founder-badge founder-badge-top">
+                  <Dna size={16} color="#4CD6FF" />
+                  <span>BioSpark Founder</span>
+                </div>
               </div>
-              <h3 className="metric-number">150+</h3>
-              <p className="metric-label">Schools Empowered</p>
             </div>
 
-            <div className="metric-card glass-panel interactive">
-              <div className="metric-icon-box">
-                <Users size={30} color="var(--accent-green)" />
+            {/* Right Column: Information & Achievement Cards */}
+            <div className="founder-content-col">
+              <div className="founder-tag-pill">
+                <Sparkles size={14} color="#73C52A" />
+                <span>ABOUT THE FOUNDER</span>
               </div>
-              <h3 className="metric-number">10K+</h3>
-              <p className="metric-label">Students Reached</p>
-            </div>
 
-            <div className="metric-card glass-panel interactive">
-              <div className="metric-icon-box">
-                <FlaskConical size={30} color="var(--accent-green)" />
-              </div>
-              <h3 className="metric-number">200+</h3>
-              <p className="metric-label">Workshops Conducted</p>
-            </div>
+              <h2 className="founder-heading">
+                BioSpark is more than a platform — <span className="gradient-text">we are a movement.</span>
+              </h2>
 
-            <div className="metric-card glass-panel interactive">
-              <div className="metric-icon-box">
-                <Globe size={30} color="var(--accent-green)" />
+              {/* Achievement Grid Cards */}
+              <div className="founder-cards-grid">
+                <div className="achievement-card">
+                  <div className="achievement-icon-box">
+                    <GraduationCap size={22} color="#73C52A" />
+                  </div>
+                  <div className="achievement-text">
+                    <h4>B.Sc. in Biotechnology</h4>
+                    <p>Faculty of Science, Excellent with Honors</p>
+                  </div>
+                </div>
+
+                <div className="achievement-card">
+                  <div className="achievement-icon-box">
+                    <UserCheck size={22} color="#4CD6FF" />
+                  </div>
+                  <div className="achievement-text">
+                    <h4>5+ Years Experience</h4>
+                    <p>In Science Education & Practical Learning</p>
+                  </div>
+                </div>
+
+                <div className="achievement-card">
+                  <div className="achievement-icon-box">
+                    <Microscope size={22} color="#73C52A" />
+                  </div>
+                  <div className="achievement-text">
+                    <h4>4+ Years Science Comm.</h4>
+                    <p>Simplifying Science & Interactive Workshops</p>
+                  </div>
+                </div>
+
+                <div className="achievement-card">
+                  <div className="achievement-icon-box">
+                    <Award size={22} color="#FFD700" />
+                  </div>
+                  <div className="achievement-text">
+                    <h4>Multiple National Awards</h4>
+                    <p>In Science Communication & Innovation</p>
+                  </div>
+                </div>
+
+                <div className="achievement-card achievement-card-full">
+                  <div className="achievement-icon-box">
+                    <Rocket size={22} color="#FF7A00" />
+                  </div>
+                  <div className="achievement-text">
+                    <h4>Biotechnology Startup Founder</h4>
+                    <p>Developing sustainable solutions for waste valorization</p>
+                  </div>
+                </div>
               </div>
-              <h3 className="metric-number">15+</h3>
-              <p className="metric-label">Cities Covered</p>
+
+              <div className="founder-cta-group">
+                <button className="btn-primary founder-btn" onClick={() => navigate('/for-schools')}>
+                  <span>Explore School Programs</span>
+                  <ArrowRight size={18} />
+                </button>
+              </div>
             </div>
           </div>
         </div>
+
+
       </section>
 
       {/* 3. GALLERY SECTION (معرض الأعمال) */}
@@ -430,18 +486,243 @@ export default function AboutPage() {
           background: var(--accent-green);
         }
 
-        /* 2. Who We Are Section */
+        /* 2. About the Founder Section Redesign */
         .who-we-are-section {
           max-width: 1240px;
           margin: 0 auto 5rem;
           padding: 0 1.5rem;
         }
 
-        .who-we-are-grid {
+        .founder-container {
+          position: relative;
+          background: rgba(0, 22, 50, 0.55);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          border-radius: 36px;
+          padding: 3.5rem 3.5rem;
+          box-shadow: 0 30px 70px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+          overflow: hidden;
+        }
+
+        .founder-container::before {
+          content: '';
+          position: absolute;
+          top: -30%; left: -20%;
+          width: 60%; height: 60%;
+          background: radial-gradient(circle, rgba(115, 197, 42, 0.18) 0%, transparent 70%);
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        .founder-grid {
           display: grid;
-          grid-template-columns: 1fr 1.1fr;
-          gap: 4rem;
+          grid-template-columns: 1fr 1.35fr;
+          gap: 3.5rem;
           align-items: center;
+          position: relative;
+          z-index: 2;
+        }
+
+        /* Founder Portrait Frame */
+        .founder-card-frame {
+          position: relative;
+          max-width: 420px;
+          margin: 0 auto;
+        }
+
+        .founder-image-wrapper {
+          position: relative;
+          border-radius: 28px;
+          overflow: hidden;
+          background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02));
+          border: 1px solid rgba(255, 255, 255, 0.18);
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+          aspect-ratio: 4 / 5;
+        }
+
+        .founder-portrait {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center 20%;
+          display: block;
+          transition: transform 0.5s ease;
+        }
+
+        .founder-card-frame:hover .founder-portrait {
+          transform: scale(1.04);
+        }
+
+        .founder-overlay-gradient {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to top, rgba(1, 27, 78, 0.75) 0%, transparent 50%);
+          pointer-events: none;
+        }
+
+        /* Floating Badges */
+        .founder-badge {
+          position: absolute;
+          background: rgba(4, 28, 62, 0.88);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+          z-index: 5;
+        }
+
+        .founder-badge-bottom {
+          bottom: 1.5rem;
+          left: -1rem;
+          border-radius: 20px;
+          padding: 0.8rem 1.4rem;
+          display: flex;
+          align-items: center;
+          gap: 0.9rem;
+          animation: floatSlowBadge 5s ease-in-out infinite alternate;
+        }
+
+        .badge-icon-spark {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background: rgba(115, 197, 42, 0.18);
+          border: 1px solid rgba(115, 197, 42, 0.35);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+
+        .badge-name {
+          font-size: 1.05rem;
+          font-weight: 800;
+          color: #ffffff;
+          margin: 0;
+          line-height: 1.2;
+        }
+
+        .badge-role {
+          font-size: 0.82rem;
+          color: #94A3B8;
+          margin: 0;
+        }
+
+        .founder-badge-top {
+          top: 1.2rem;
+          right: -1rem;
+          border-radius: 99px;
+          padding: 0.55rem 1.2rem;
+          display: flex;
+          align-items: center;
+          gap: 0.55rem;
+          font-size: 0.85rem;
+          font-weight: 700;
+          color: #ffffff;
+          animation: floatSlowBadge 6s ease-in-out infinite alternate-reverse;
+        }
+
+        @keyframes floatSlowBadge {
+          0% { transform: translateY(0); }
+          100% { transform: translateY(-8px); }
+        }
+
+        /* Founder Content Column */
+        .founder-tag-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.6rem;
+          padding: 0.45rem 1.1rem;
+          border-radius: 99px;
+          background: rgba(115, 197, 42, 0.14);
+          border: 1px solid rgba(115, 197, 42, 0.35);
+          color: var(--accent-green);
+          font-size: 0.82rem;
+          font-weight: 800;
+          letter-spacing: 1px;
+          margin-bottom: 1.2rem;
+        }
+
+        .founder-heading {
+          font-size: clamp(1.8rem, 3vw, 2.5rem);
+          font-weight: 800;
+          line-height: 1.25;
+          color: #ffffff;
+          margin-bottom: 2rem;
+        }
+
+        .gradient-text {
+          background: linear-gradient(135deg, #73C52A 0%, #4CD6FF 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        /* Achievement Cards Grid */
+        .founder-cards-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1.2rem;
+          margin-bottom: 2rem;
+        }
+
+        .achievement-card {
+          display: flex;
+          align-items: flex-start;
+          gap: 1rem;
+          padding: 1.1rem 1.2rem;
+          border-radius: 18px;
+          background: rgba(255, 255, 255, 0.04);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .achievement-card:hover {
+          background: rgba(255, 255, 255, 0.08);
+          border-color: rgba(115, 197, 42, 0.35);
+          transform: translateY(-4px);
+          box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        .achievement-card-full {
+          grid-column: 1 / -1;
+          background: linear-gradient(90deg, rgba(115, 197, 42, 0.08) 0%, rgba(0, 139, 240, 0.08) 100%);
+          border: 1px solid rgba(115, 197, 42, 0.25);
+        }
+
+        .achievement-icon-box {
+          width: 44px;
+          height: 44px;
+          border-radius: 12px;
+          background: rgba(0, 0, 0, 0.3);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+
+        .achievement-text h4 {
+          font-size: 0.98rem;
+          font-weight: 700;
+          color: #ffffff;
+          margin: 0 0 0.2rem 0;
+          line-height: 1.3;
+        }
+
+        .achievement-text p {
+          font-size: 0.85rem;
+          color: #CBD5E1;
+          margin: 0;
+          line-height: 1.4;
+        }
+
+        .founder-btn {
+          padding: 0.85rem 2rem;
+          font-size: 0.95rem;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.75rem;
         }
 
         .who-tag {
@@ -608,7 +889,7 @@ export default function AboutPage() {
           .hero-grid { grid-template-columns: 1fr; text-align: center; }
           .hero-subtitle { margin: 0 auto 2rem; }
           .hero-actions { justify-content: center; }
-          .who-we-are-grid { grid-template-columns: 1fr; text-align: center; }
+          .who-we-are-grid, .founder-grid { grid-template-columns: 1fr; text-align: center; }
           .learn-more-btn { margin: 0 auto; }
           .about-hero-card { padding: 3rem 2rem; }
         }

@@ -5,9 +5,48 @@ import { FaWhatsapp } from 'react-icons/fa';
 import { fetchCamps, fetchSiteContent } from '../services/api';
 import Card3D from '../components/Card3D';
 
+const DEFAULT_CAMPS = [
+  {
+    _id: '1',
+    title: 'Summer Biotech Discovery Camp',
+    category: 'Summer Camp',
+    shortDescription: '5 days of hands-on genetic engineering, DNA isolation, and interactive bio-art for young scientists.',
+    description: 'An immersive 5-day educational camp introducing students to DNA extraction, bacterial transformation, and gel electrophoresis.',
+    imageUrl: '/main.png',
+    duration: '5 Days',
+    ageGroup: 'Grades 6-12',
+    location: 'Cairo, Egypt',
+    highlights: ['DNA Extraction', 'Gel Electrophoresis', 'Microbiology Lab', 'Safety Certificate']
+  },
+  {
+    _id: '2',
+    title: 'Genetics & Molecular Biology Camp',
+    category: 'Genetics',
+    shortDescription: 'Explore the blueprint of life through real PCR amplification, micropipetting, and DNA sequencing simulations.',
+    description: 'Dive deep into molecular genetics with state-of-the-art laboratory equipment.',
+    imageUrl: '/herosec.png',
+    duration: '3 Days',
+    ageGroup: 'Grades 8-12',
+    location: 'Cairo, Egypt',
+    highlights: ['PCR Amplification', 'Micropipetting Skills', 'Gene Mapping', 'Scientific Certificate']
+  },
+  {
+    _id: '3',
+    title: 'Junior BioExplorer Winter Camp',
+    category: 'Junior Camp',
+    shortDescription: 'Fun and safe biology experiments for kids discovering cells, plants, and microorganisms.',
+    description: 'An exciting winter camp designed for elementary and middle school students.',
+    imageUrl: '/spark_character.png',
+    duration: '4 Days',
+    ageGroup: 'Grades 4-8',
+    location: 'Cairo, Egypt',
+    highlights: ['Microscope Training', 'Plant Bio-Kits', 'Interactive Models', 'Fun Experiments']
+  }
+];
+
 export default function Camps() {
-  const [camps, setCamps] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [camps, setCamps] = useState(DEFAULT_CAMPS);
+  const [loading, setLoading] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [whatsappNum, setWhatsappNum] = useState('201140866774');
 
@@ -15,7 +54,7 @@ export default function Camps() {
     async function loadData() {
       try {
         const res = await fetchCamps({ active: true });
-        if (res?.data?.data) {
+        if (res?.data?.data && res.data.data.length > 0) {
           setCamps(res.data.data);
         }
       } catch (err) {

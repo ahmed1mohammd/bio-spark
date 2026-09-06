@@ -56,7 +56,7 @@ export default function ContactPage() {
                 <Mail size={24} color="#73C52A" />
                 <div>
                   <strong>Email Us</strong>
-                  <p>info@biospark.com</p>
+                  <p>biospark225@gmail.com</p>
                 </div>
               </div>
 
@@ -64,7 +64,7 @@ export default function ContactPage() {
                 <Phone size={24} color="#73C52A" />
                 <div>
                   <strong>Call or WhatsApp</strong>
-                  <p>+20 100 123 4567</p>
+                  <p>+20 11 40866774</p>
                 </div>
               </div>
 
@@ -127,7 +127,7 @@ export default function ContactPage() {
                     name="phone" 
                     value={formData.phone}
                     onChange={handleChange}
-                    placeholder="+20 100 123 4567"
+                    placeholder="+20 11 40866774"
                   />
                 </div>
 

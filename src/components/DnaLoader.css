@@ -1,0 +1,87 @@
+.dna-loader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+  min-height: 180px;
+}
+
+.dna-helix-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 80px;
+  perspective: 800px;
+}
+
+.dna-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 4px;
+  position: relative;
+  animation: dnaRotate 2.2s ease-in-out infinite alternate;
+  transform-style: preserve-3d;
+}
+
+.dna-node {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.node-top {
+  top: 0;
+  background: #73C52A;
+  box-shadow: 0 0 12px rgba(115, 197, 42, 0.8), 0 0 24px rgba(115, 197, 42, 0.4);
+}
+
+.node-bottom {
+  bottom: 0;
+  background: #4CD6FF;
+  box-shadow: 0 0 12px rgba(76, 214, 255, 0.8), 0 0 24px rgba(76, 214, 255, 0.4);
+}
+
+.dna-line {
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(115, 197, 42, 0.6), rgba(76, 214, 255, 0.6));
+  opacity: 0.5;
+}
+
+@keyframes dnaRotate {
+  0% {
+    transform: rotateX(0deg) scale(0.6);
+    opacity: 0.3;
+  }
+  50% {
+    transform: rotateX(180deg) scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: rotateX(360deg) scale(0.6);
+    opacity: 0.3;
+  }
+}
+
+.dna-loader-text {
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #73C52A 0%, #4CD6FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: pulseText 2s ease-in-out infinite alternate;
+}
+
+@keyframes pulseText {
+  0% { opacity: 0.5; transform: scale(0.98); }
+  100% { opacity: 1; transform: scale(1.02); }
+}

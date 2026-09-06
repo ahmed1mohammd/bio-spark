@@ -2,9 +2,36 @@ import React, { useState, useEffect } from 'react';
 import { FaWhatsapp } from 'react-icons/fa';
 import { fetchData, API_ENDPOINTS } from '../utils/api';
 
+const DEFAULT_PRODUCTS = [
+  {
+    _id: '1',
+    title: '3D DNA Double Helix Model',
+    category: '3D Product',
+    description: 'Precision 3D printed double helix structure with color-coded nitrogenous bases (A, T, C, G).',
+    imageUrl: '/main.png',
+    price: '$45'
+  },
+  {
+    _id: '2',
+    title: 'Cellular Biology Puzzle Set',
+    category: 'Puzzles',
+    description: 'Interactive organelle assembly puzzle designed for intuitive understanding of eukaryotic cell anatomy.',
+    imageUrl: '/herosec.png',
+    price: '$35'
+  },
+  {
+    _id: '3',
+    title: 'Edutainment Science Discovery Kit',
+    category: 'Edutainment',
+    description: 'Comprehensive experiment kit featuring safe reagents, micro-tubes, and guided lab protocols.',
+    imageUrl: '/spark_character.png',
+    price: '$55'
+  }
+];
+
 export default function ProductsPage() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState(DEFAULT_PRODUCTS);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [activeCategory, setActiveCategory] = useState('All');
 
@@ -14,9 +41,11 @@ export default function ProductsPage() {
     const getProducts = async () => {
       try {
         const result = await fetchData(API_ENDPOINTS.PRODUCTS);
-        setProducts(result.data);
+        if (result?.data && result.data.length > 0) {
+          setProducts(result.data);
+        }
       } catch (err) {
-        setError('Failed to load products. Please try again later.');
+        console.error('Products fetch error:', err);
       } finally {
         setLoading(false);
       }

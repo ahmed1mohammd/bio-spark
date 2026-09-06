@@ -3,15 +3,34 @@ import { Link } from 'react-router-dom';
 import { fetchData, API_ENDPOINTS } from '../utils/api';
 import Card3D from '../components/Card3D';
 
+const DEFAULT_EVENTS = [
+  {
+    _id: '1',
+    title: 'National Biotech & STEM Fair 2026',
+    description: 'Join BioSpark at the annual STEM Fair showcasing interactive mobile laboratories and live gene editing demonstrations.',
+    imageUrl: '/herosec.png',
+    registrationLink: 'https://wa.me/201140866774'
+  },
+  {
+    _id: '2',
+    title: 'Future Scientists Science Exhibition',
+    description: 'An interactive showcase featuring 3D cellular models, student experiment exhibits, and hands-on science challenges.',
+    imageUrl: '/main.png',
+    registrationLink: 'https://wa.me/201140866774'
+  }
+];
+
 export default function Events() {
-  const [events, setEvents] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [events, setEvents] = useState(DEFAULT_EVENTS);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const getEvents = async () => {
       try {
         const result = await fetchData(API_ENDPOINTS.EVENTS);
-        setEvents(result?.data || []);
+        if (result?.data && result.data.length > 0) {
+          setEvents(result.data);
+        }
       } catch (err) {
         console.error('Failed to load events:', err);
       } finally {
