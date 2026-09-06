@@ -11,8 +11,8 @@ const defaultLeadership = [
     description: "Biotechnology expert passionate about interactive STEM learning and science communication.",
     image: "https://i.ibb.co/Swf7dWKP/1253ad67-7fdc-438e-b138-3945c710d495.jpg",
     linkedin: "https://www.linkedin.com/in/zyad-khalil-856071288?trk=contact-info",
-    facebook: "#",
-    tiktok: "#"
+    facebook: "https://www.facebook.com/share/1BAxxzyTwt/",
+    tiktok: "https://www.tiktok.com/@biospark2?is_from_webapp=1&sender_device=pc"
   },
   {
     _id: '2',
@@ -20,31 +20,9 @@ const defaultLeadership = [
     role: "Co-founder & Academic Director",
     description: "Science communicator turning complex biology into fun, hands-on scientific experiences.",
     image: "https://i.ibb.co/tM3SJCFR/8e9c6115-2587-41b6-a9bf-36f459d64454.jpg",
-    linkedin: "#", facebook: "#", tiktok: "#"
-  },
-  {
-    _id: '3',
-    name: "Eng. Mohamed Nabil",
-    role: "Board Member & STEM Lead",
-    description: "STEM educator and entrepreneur focused on impactful biological education.",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
-    linkedin: "#", facebook: "#", tiktok: "#"
-  },
-  {
-    _id: '4',
-    name: "Dr. Rana Hassan",
-    role: "Board Member & Curriculum Head",
-    description: "Biotech researcher specializing in modern school science curriculum development.",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80",
-    linkedin: "#", facebook: "#", tiktok: "#"
-  },
-  {
-    _id: '5',
-    name: "Omar Walid",
-    role: "Board Member & Innovation Advocate",
-    description: "Youth advocate for scientific communication, biotechnology, and youth innovation.",
-    image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=400&q=80",
-    linkedin: "#", facebook: "#", tiktok: "#"
+    linkedin: "#", 
+    facebook: "https://www.facebook.com/share/1BAxxzyTwt/", 
+    tiktok: "https://www.tiktok.com/@biospark2?is_from_webapp=1&sender_device=pc"
   }
 ];
 

@@ -13,7 +13,7 @@ const defaultGalleryItems = [
   },
   {
     _id: '2',
-    title: 'Mobile Bio Lab Setup at St. George',
+    title: 'Mobile Bio Lab Setup',
     description: 'BioSpark portable biotechnology suite set up inside a school laboratory classroom.',
     imageUrl: '/spark_character.png',
     category: 'Experiments',
@@ -32,38 +32,6 @@ const defaultGalleryItems = [
     title: 'Bacterial Transformation Achievement',
     description: 'Junior scientists observing glowing GFP bacterial colonies under UV transilluminators.',
     imageUrl: '/About.png',
-    category: 'Students',
-    size: 'medium'
-  },
-  {
-    _id: '5',
-    title: 'St. George International School Partner',
-    description: 'BioSpark educational partnership delivering K-12 biotechnology programs.',
-    imageUrl: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=800&q=80',
-    category: 'OUR CUSTOMERS',
-    size: 'wide'
-  },
-  {
-    _id: '6',
-    title: 'Behind the Scenes: Reagent Prep',
-    description: 'Our scientific mentors calibrating buffer solutions and PCR reagents before school visits.',
-    imageUrl: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=800&q=80',
-    category: 'Behind the Scenes',
-    size: 'portrait'
-  },
-  {
-    _id: '7',
-    title: 'Modern British Academy Partner',
-    description: 'Collaborative biotechnology workshops and mobile laboratory sessions.',
-    imageUrl: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=800&q=80',
-    category: 'OUR CUSTOMERS',
-    size: 'medium'
-  },
-  {
-    _id: '8',
-    title: 'Summer STEM Camp Certificate Awards',
-    description: 'Celebrating future biotechnologists upon completing their 5-day intensive lab module.',
-    imageUrl: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80',
     category: 'Students',
     size: 'medium'
   }
