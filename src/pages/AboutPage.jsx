@@ -890,14 +890,38 @@ export default function AboutPage() {
           .hero-subtitle { margin: 0 auto 2rem; }
           .hero-actions { justify-content: center; }
           .who-we-are-grid, .founder-grid { grid-template-columns: 1fr; text-align: center; }
+          .founder-container { padding: 2.5rem 1.8rem; border-radius: 28px; }
+          .founder-card-frame { max-width: 360px; margin: 0 auto 1.5rem; }
+          .founder-badge-bottom { left: 0.5rem; bottom: 0.8rem; }
+          .founder-badge-top { right: 0.5rem; top: 0.8rem; }
+          .founder-tag-pill { margin: 0 auto 1.2rem; }
           .learn-more-btn { margin: 0 auto; }
           .about-hero-card { padding: 3rem 2rem; }
+          .carousel-arrow.prev { left: 0.5rem; }
+          .carousel-arrow.next { right: 0.5rem; }
+        }
+
+        @media (max-width: 768px) {
+          .about-hero-section, .who-we-are-section { padding: 0 1rem; }
+          .about-hero-card { padding: 2.2rem 1.2rem; border-radius: 24px; }
+          .hero-title { font-size: clamp(1.75rem, 5.5vw, 2.5rem); }
+          .hero-subtitle { font-size: 0.98rem; }
+          .founder-container { padding: 1.8rem 1.2rem; border-radius: 24px; }
+          .founder-heading { font-size: 1.6rem; text-align: center; }
+          .founder-cards-grid { grid-template-columns: 1fr; gap: 0.9rem; }
+          .achievement-card { padding: 0.9rem 1rem; text-align: left; }
+          .founder-btn { width: 100%; justify-content: center; }
+          .carousel-arrow { display: none; }
         }
 
         @media (max-width: 576px) {
           .metrics-grid { grid-template-columns: 1fr; }
-          .about-hero-card { padding: 2.5rem 1.2rem; }
-          .carousel-arrow { display: none; }
+          .about-hero-card { padding: 2rem 1rem; }
+          .mascot-img { max-height: 260px; }
+          .founder-badge-bottom { padding: 0.6rem 1rem; }
+          .badge-name { font-size: 0.9rem; }
+          .badge-role { font-size: 0.75rem; }
+          .founder-badge-top { padding: 0.4rem 0.9rem; font-size: 0.75rem; }
         }
       `}</style>
     </div>

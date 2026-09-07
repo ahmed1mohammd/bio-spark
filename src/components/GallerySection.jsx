@@ -759,8 +759,18 @@ export default function GallerySection() {
             gap: 1rem;
           }
           .gallery-col { gap: 1rem; }
-          .gallery-card.card-tall { height: 320px; }
-          .gallery-card.card-short { height: 180px; }
+          .gallery-col:nth-child(3) {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+          }
+          .gallery-card.card-tall { height: 300px; }
+          .gallery-card.card-short { height: 200px; }
+
+          .partner-logos-strip { padding: 1.2rem 1rem; }
+          .partner-logos-row { gap: 1.5rem; }
+          .partner-logo-item { height: 40px; }
 
           .lightbox-modal {
             padding: 0 1rem;
@@ -772,17 +782,34 @@ export default function GallerySection() {
           }
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 576px) {
+          .gallery-section { padding: 3.5rem 1rem; }
+          .gallery-header { margin-bottom: 2rem; }
           .gallery-3col-grid {
-            grid-template-columns: 1fr;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+          }
+          .gallery-col {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+          }
+          .gallery-col:nth-child(3) {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
           }
           .gallery-card.card-tall, .gallery-card.card-short {
-            height: 250px;
+            height: 240px;
           }
           .filter-btn {
             padding: 0.5rem 1rem;
             font-size: 0.78rem;
           }
+          .lightbox-img { max-height: 50vh; }
+          .lightbox-caption { padding: 1.2rem; }
+          .lightbox-caption h3 { font-size: 1.1rem; }
         }
       `}</style>
     </section>
