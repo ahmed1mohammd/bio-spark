@@ -40,7 +40,7 @@ export default function ProductDetail() {
           <div className="product-info glass-panel">
             <div className="category-badge">{product.category}</div>
             <h1>{product.title}</h1>
-            <div className="price-tag">${product.price}</div>
+            <div className="price-tag">{product.price} EGP</div>
 
             <p className="description">{product.description}</p>
 

@@ -69,7 +69,7 @@ export default function CampDetail() {
 
               <div className="price-box">
                 <span>Tuition Fee</span>
-                <h4>{camp.price > 0 ? `$${camp.price}` : 'Free / Sponsored'}</h4>
+                <h4>{camp.price > 0 ? `${camp.price} EGP` : 'Free / Sponsored'}</h4>
               </div>
 
               <a 

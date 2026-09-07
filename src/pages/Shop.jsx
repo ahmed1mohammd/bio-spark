@@ -219,9 +219,9 @@ export default function Shop() {
                     {/* Price & Stock Row */}
                     <div className="price-row">
                       <div className="pricing">
-                        <span className="currency">$</span>
                         <span className="price">{product.price}</span>
-                        {product.salePrice > 0 && <span className="sale-price">${product.salePrice}</span>}
+                        <span className="currency" style={{ marginLeft: '4px', fontSize: '0.9rem', fontWeight: '800', color: 'var(--accent-green)' }}>EGP</span>
+                        {product.salePrice > 0 && <span className="sale-price" style={{ marginLeft: '8px' }}>{product.salePrice} EGP</span>}
                       </div>
                       <span className="stock-status in-stock">
                         {product.stockStatus || 'In Stock'}

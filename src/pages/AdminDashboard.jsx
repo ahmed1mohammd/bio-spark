@@ -802,7 +802,7 @@ export default function AdminDashboard() {
                         <td><strong>{camp.title}</strong></td>
                         <td><span className="pill">{camp.category}</span></td>
                         <td>{camp.dates}</td>
-                        <td>${camp.price}</td>
+                        <td>{camp.price} EGP</td>
                         <td>
                           <div className="action-btns">
                             <button className="btn-icon" onClick={() => openEditModal('camps', camp)}><Edit3 size={16} /></button>
@@ -843,7 +843,7 @@ export default function AdminDashboard() {
                         <td><img src={prod.imageUrl} alt="" className="thumb" onError={(e) => { e.target.src = '/main.png'; }} /></td>
                         <td><strong>{prod.title}</strong></td>
                         <td><span className="pill">{prod.category}</span></td>
-                        <td>${prod.price}</td>
+                        <td>{prod.price} EGP</td>
                         <td><span className="stock-tag">{prod.stockStatus}</span></td>
                         <td>
                           <div className="action-btns">
@@ -1258,7 +1258,7 @@ export default function AdminDashboard() {
               {formFields.price !== undefined && (
                 <div className="form-row">
                   <div className="form-group">
-                    <label>Price ($)</label>
+                    <label>Price (EGP)</label>
                     <input 
                       type="number" 
                       value={formFields.price || 0} 
@@ -1266,7 +1266,7 @@ export default function AdminDashboard() {
                     />
                   </div>
                   <div className="form-group">
-                    <label>Sale Price ($)</label>
+                    <label>Sale Price (EGP)</label>
                     <input 
                       type="number" 
                       value={formFields.salePrice || 0} 

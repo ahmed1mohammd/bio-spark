@@ -163,7 +163,7 @@ export default function Camps() {
                   <div className="card-footer" style={{ flexDirection: 'column', gap: '0.8rem', alignItems: 'stretch' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <div className="price-tag">
-                        {camp.price > 0 ? `$${camp.price}` : 'Inquire for Pricing'}
+                        {camp.price > 0 ? `${camp.price} EGP` : 'Inquire for Pricing'}
                       </div>
                       <Link to={`/camps/${camp.slug || camp._id}`} style={{ color: 'var(--accent-cyan)', fontSize: '0.9rem', textDecoration: 'none', fontWeight: 600 }}>
                         View Details &rarr;

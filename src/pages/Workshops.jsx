@@ -122,7 +122,7 @@ const WorkshopCard3D = ({ ws }) => {
           <div className="workshop-footer">
             {ws.price !== undefined && ws.price !== null && (
               <div className="workshop-price">
-                {ws.price > 0 ? `$${ws.price}` : 'Inquire for Pricing'}
+                {ws.price > 0 ? `${ws.price} EGP` : 'Inquire for Pricing'}
               </div>
             )}
             <a
