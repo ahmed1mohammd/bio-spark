@@ -6,26 +6,36 @@ import { fetchBoardMembers } from '../services/api';
 const defaultLeadership = [
   {
     _id: '1',
-    name: "Dr_Zeee",
+    name: "Dr. Zee",
     role: "CEO & Founder | Lab Specialist",
     description: "Biotechnology expert passionate about interactive STEM learning and science communication.",
-    image: "https://i.ibb.co/Swf7dWKP/1253ad67-7fdc-438e-b138-3945c710d495.jpg",
+    image: "/dr-zee.jpg",
     linkedin: "https://www.linkedin.com/in/zyad-khalil-856071288?trk=contact-info",
-    facebook: "https://www.facebook.com/share/1BAxxzyTwt/",
-    tiktok: "https://www.tiktok.com/@biospark2?is_from_webapp=1&sender_device=pc"
+    facebook: "https://www.facebook.com/share/1WK8z3N1bD/?mibextid=wwXIfr",
+    tiktok: "https://www.tiktok.com/@zyadmarcello?is_from_webapp=1&sender_device=pc"
   }
 ];
 
 export default function BoardMembers() {
-  const [members, setMembers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [members, setMembers] = useState(defaultLeadership);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function loadMembers() {
       try {
         const res = await fetchBoardMembers();
         if (res?.data?.data && res.data.data.length > 0) {
-          setMembers(res.data.data);
+          const mapped = res.data.data.map(m => {
+            const isDrZee = m.name?.toLowerCase().includes('zee') || m.name?.toLowerCase().includes('zyad');
+            return {
+              ...m,
+              image: m.imageUrl || m.image || (isDrZee ? '/dr-zee.jpg' : 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80'),
+              linkedin: isDrZee ? "https://www.linkedin.com/in/zyad-khalil-856071288?trk=contact-info" : (m.linkedin || '#'),
+              facebook: isDrZee ? "https://www.facebook.com/share/1WK8z3N1bD/?mibextid=wwXIfr" : (m.facebook || '#'),
+              tiktok: isDrZee ? "https://www.tiktok.com/@zyadmarcello?is_from_webapp=1&sender_device=pc" : (m.tiktok || '#')
+            };
+          });
+          setMembers(mapped);
         } else {
           setMembers(defaultLeadership);
         }

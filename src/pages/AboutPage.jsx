@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Building2, Users, FlaskConical, Globe, ChevronLeft, ChevronRight, Play, X, ArrowRight, GraduationCap, Award, Rocket, Microscope, UserCheck, Sparkles, Dna } from 'lucide-react';
+import { FaLinkedin, FaFacebook, FaTiktok } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { fetchSiteContent, fetchCarousels } from '../services/api';
 import BoardMembers from '../components/BoardMembers';
@@ -258,6 +259,17 @@ export default function AboutPage() {
                   <span>Explore School Programs</span>
                   <ArrowRight size={18} />
                 </button>
+                <div className="founder-socials">
+                  <a href="https://www.linkedin.com/in/zyad-khalil-856071288?trk=contact-info" target="_blank" rel="noopener noreferrer" className="founder-social-btn linkedin" aria-label="LinkedIn" title="LinkedIn">
+                    <FaLinkedin size={18} />
+                  </a>
+                  <a href="https://www.facebook.com/share/1WK8z3N1bD/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="founder-social-btn facebook" aria-label="Facebook" title="Facebook">
+                    <FaFacebook size={18} />
+                  </a>
+                  <a href="https://www.tiktok.com/@zyadmarcello?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer" className="founder-social-btn tiktok" aria-label="TikTok" title="TikTok">
+                    <FaTiktok size={18} />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -717,12 +729,62 @@ export default function AboutPage() {
           line-height: 1.4;
         }
 
+        .founder-cta-group {
+          display: flex;
+          align-items: center;
+          gap: 1.2rem;
+          flex-wrap: wrap;
+        }
+
         .founder-btn {
           padding: 0.85rem 2rem;
           font-size: 0.95rem;
           display: inline-flex;
           align-items: center;
           gap: 0.75rem;
+        }
+
+        .founder-socials {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+        }
+
+        .founder-social-btn {
+          width: 44px;
+          height: 44px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.08);
+          border: 1px solid rgba(255, 255, 255, 0.18);
+          color: #ffffff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.25s ease;
+          text-decoration: none;
+        }
+
+        .founder-social-btn:hover {
+          transform: translateY(-3px) scale(1.08);
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+        }
+
+        .founder-social-btn.linkedin:hover {
+          background: #0A66C2;
+          border-color: #0A66C2;
+          color: #ffffff;
+        }
+
+        .founder-social-btn.facebook:hover {
+          background: #1877F2;
+          border-color: #1877F2;
+          color: #ffffff;
+        }
+
+        .founder-social-btn.tiktok:hover {
+          background: #EE1D52;
+          border-color: #EE1D52;
+          color: #ffffff;
         }
 
         .who-tag {
@@ -910,6 +972,7 @@ export default function AboutPage() {
           .founder-heading { font-size: 1.6rem; text-align: center; }
           .founder-cards-grid { grid-template-columns: 1fr; gap: 0.9rem; }
           .achievement-card { padding: 0.9rem 1rem; text-align: left; }
+          .founder-cta-group { justify-content: center; }
           .founder-btn { width: 100%; justify-content: center; }
           .carousel-arrow { display: none; }
         }
